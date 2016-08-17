@@ -23,7 +23,7 @@ app.controller('optionSalesman', function($scope){
 
 
 //manager2
-app.controller('manager2Controller', function ($scope) {
+app.controller('manager2Ctrl', function ($scope) {
     $scope.pers = [
         {id: 1 , name: 'li', phone: '123' ,remark: '555'},
         {id: 2 , name: 'zi', phone: '222' ,remark: '555'},

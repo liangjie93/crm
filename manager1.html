@@ -31,7 +31,7 @@
         <!-- first-left end-->
         <div class="first-right">
             <button type="button" class="btn btn-primary">导出报表</button>
-            <a href="#/edit"><button type="button" class="btn btn-warning btn-primary">新建客户</button></a>
+            <a href="#/manager1/addClient"><button type="button" class="btn btn-warning btn-primary">新建客户</button></a>
         </div>
     </div>
     <!--first-section end -->
@@ -51,8 +51,11 @@
             <tr ng-repeat='item in infos'>
                 <td>{{item.company}}</td>
                 <td>
-                    <p>{{item.contact}}</p>
-                    {{item.department}}</td>
+                    <p>{{item.contact}}
+                    <p>{{item.department}}
+                   <!--  <p>{{item.}}
+                    <p>{{item.testAccount}} -->
+                </td>
                 <td>{{item.products}}</td>
                 <td>{{item.price}}</td>
                 <td>{{item.progress}}</td>
