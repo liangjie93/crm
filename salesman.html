@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/public.css">
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src='js/bootstrap.min.js'></script>
+
+</head>
+
+<body>
+    <div class="header">qukan logo</div>
+    <div class="left-container">
+        <ul class='nav nav-pills nav-stacked'>
+            <li role="presentation"><a href="salesmanCustomers.html" id='present'>客户关系管理</a></li>
+        </ul>
+    </div>
+    <div class="right-container">
+        <div class="user glyphicon glyphicon-user" aria-hidden="true"></div>
+        <div class="first-section">
+            <div class="first-left">
+                <div class="form-inline">
+                    <div class="form-group pull">
+                        <select class="form-control">
+                                <option value="1">下拉选择</option>
+                                <option value="2"></option>
+                                <option value="3"></option>
+                                <option value="3"></option>
+                            </select>
+                    </div>
+                    <div class="row serach form-group">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="输入关键字">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- first-left end-->
+
+            <div class="first-right">
+                <button type="button" class="btn btn-warning btn-primary" data-toggle="modal" data-target="#edit">新建客户</button>
+            </div>
+
+        </div>
+        <!--first-section end -->
+        <div class="second-section">
+            <table class="table">
+                <tr class='title'>
+                    <th>公司名</th>
+                    <th>联系人/部门</th>
+                    <th>产品</th>
+                    <th>报价</th>
+                    <th>当前进展</th>
+                    <th>销售经理</th>
+                    <th>最新维护日期</th>
+                    <th>操作</th>
+                </tr>
+                <tr>
+                    <td>zj</td>
+                    <td>
+                        <p>技术部</p>李经理</td>
+                    <td>L</td>
+                    <td>168W</td>
+                    <td>..</td>
+                    <td>..</td>
+                    <td>..</td>
+                    <td>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#maintain">查看进展</button>
+                        <button type="button" class="btn btn-info">编辑</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>浙江</td>
+                    <td>技术部</td>
+                    <td>..</td>
+                    <td>..</td>
+                    <td>..</td>
+                    <td>..</td>
+                    <td>..</td>
+                    <td>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#maintain">查看进展</button>
+                        <button type="button" class="btn btn-info">编辑</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="second-section"></div>
+
+        <!--</div>-->
+
+
+    </div>
+
+    <!-- 新建/编辑客户 Modal -->
+    <div class="modal fade myModal" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputName1" class="col-sm-2 control-label"><span>*</span>公司名:</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="inputName1" placeholder="建议输入框（请输入公司全称）">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName2" class="col-sm-2 control-label"><span>*</span>联系人:</label>
+                            <!--<div class="form-inline">-->
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control contact" id="inputName2" placeholder="姓名">
+                            </div>
+                            <div class="col-sm-2"> <input type="text" class="form-control contact" id="inputName3" placeholder="联系电话"></div>
+                            <div class="col-sm-2"><input type="text" class="form-control contact" id="inputName4" placeholder="部门或职位"></div>
+
+                            <!--</div>-->
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">销售经理:</label>
+                            <div class="col-sm-4">
+                                <select class="form-control">
+                                    <option value="1">L</option>
+                                    <option value="2">M</option>
+                                    <option value="3">N</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">产品意向:</label>
+                            <div>
+                                <div class="col-sm-4">
+                                    <select class="form-control" id="inputName1">
+                                    <option value="1">专业导播台</option>
+                                </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" placeholder="价格">
+                                </div>
+                                <div class="glyphicon glyphicon-plus" id='plus' aria-hidden="true"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+                            <div>
+                                <div class="col-sm-4">
+                                    <select class="form-control" id="inputName1">
+                                    <option value="1">下拉选择</option>
+                                </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" placeholder="请输入报价">
+                                </div>
+                                <div class="glyphicon glyphicon-remove" id='plus' aria-hidden="true"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">测试账号:</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" placeholder="请输入测试账号">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注:</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" placeholder="补充说明相关的其他情况">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 新建/编辑客户 modal end-->
+
+    <!-- 维护页面 Modal -->
+    <div class="modal fade myModal" id="maintain" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">浙江日报集团</h4>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" rows="3"></textarea>
+                    <div class="form-inline">
+                        <select class="form-control">
+                            <option>A类用户（）</option>
+                            <option>B类用户（）</option>
+                            <option>C类用户（）</option>
+                            <option>D类用户（）</option>
+                       
+                        </select>
+                        <button type="button" class="btn btn-warning">提交</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal end-->
+
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/public.css">
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src='js/bootstrap.min.js'></script>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/angular-route/1.3.13/angular-route.js"></script>
+    <script src='js/info.js'></script>
+</head>
+<body>
+    <div ng-controller='manager1Controller'>
+    <div class="user glyphicon glyphicon-user" aria-hidden="true"></div>
+    <div class="first-section">
+        <div class="first-left">
+            <div class="form-inline">
+                <div class="form-group pull">
+                    <select class="form-control">
+                            <option value="1">请选择销售经理</option>
+                            <option value="2"></option>
+                            <option value="3"></option>
+                            <option value="3"></option>
+                        </select>
+                </div>
+                <div class="form-group pull">
+                    <select class="form-control">
+                            <option value="1">A类</option>
+                            <option value="2">B类</option>
+                            <option value="3">C类</option>
+                            <option value="3">D类</option>
+                        </select>
+                </div>
+                <div class="serach form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="输入关键字" ng-model="serach">
+                        <h3 style="color:#000">{{serach}}</h3>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default glyphicon glyphicon-search" aria-hidden="true" ></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- first-left end-->
+        <div class="first-right">
+            <button type="button" class="btn btn-primary">导出报表</button>
+            <button type="button" class="btn btn-warning btn-primary"><a href="#/edit">新建客户</a></button>
+        </div>
+    </div>
+    <!--first-section end -->
+    <!--second-section-->
+    <div class="second-section" ng-app='infoApp'>
+        <table class="table" ng-controller='infoCtrl'>
+            <tr class='title'>
+                <th>公司名</th>
+                <th>联系人/部门</th>
+                <th>产品</th>
+                <th>报价</th>
+                <th>当前进展</th>
+                <th>销售经理</th>
+                <th>最新维护日期</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat='item in infos'>
+                <td>{{item.company}}</td>
+                <td>
+                    <p>{{item.contact}}</p>
+                    {{item.department}}</td>
+                <td>{{item.products}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.progress}}</td>
+                <td>{{item.manager}}</td>
+                <td>{{item.date}}</td>
+                <td>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#maintain">查看进展</button>
+                    <button type="button" class="btn btn-info">编辑</button>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!--second-section end-->
+
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<div>
+    <div class="user glyphicon glyphicon-user" aria-hidden="true"></div>
+    <div class="first-section">
+        <div class="first-left">
+            <div class="form-inline">
+                <div class="form-group pull" ng-controller='optionSalesman'>
+                    <select class="form-control" ng-model='selectSalesman' ng-options='name for name in salesmans'>
+                            <option value="">请选择销售经理</option>
+                        </select>
+                </div>
+                <div class="form-group pull">
+                    <select class="form-control">
+                            <option value="1">A类</option>
+                            <option value="2">B类</option>
+                            <option value="3">C类</option>
+                            <option value="3">D类</option>
+                        </select>
+                </div>
+                <div class="search form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="search_text" placeholder="输入关键字">
+                         
+                        <div id="auto_div"><!-- 自动补全提示框 --></div>
+                        <span class="input-group-btn"> 
+                            <button class="btn btn-default glyphicon glyphicon-search" aria-hidden="true" ></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- first-left end-->
+        <div class="first-right">
+            <button type="button" class="btn btn-primary">导出报表</button>
+            <a href="#/edit"><button type="button" class="btn btn-warning btn-primary">新建客户</button></a>
+        </div>
+    </div>
+    <!--first-section end -->
+    <!--second-section 表格-->
+    <div class="second-section">
+        <table class="table" ng-controller='infoCtrl'>
+            <tr class='title'>
+                <th>公司名</th>
+                <th>联系人/部门</th>
+                <th>产品</th>
+                <th>报价</th>
+                <th>当前进展</th>
+                <th>销售经理</th>
+                <th>最新维护日期</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat='item in infos'>
+                <td>{{item.company}}</td>
+                <td>
+                    <p>{{item.contact}}</p>
+                    {{item.department}}</td>
+                <td>{{item.products}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.progress}}</td>
+                <td>{{item.manager}}</td>
+                <td>{{item.date}}</td>
+                <td>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#maintain">查看进展</button>
+                    <button type="button" class="btn btn-info">编辑</button>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!--second-section end-->
+
+</div>
+
+<!--     <script src='js/autocomplete.js'></script>  -->

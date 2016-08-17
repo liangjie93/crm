@@ -1,0 +1,126 @@
+<div>
+    <div class="user glyphicon glyphicon-user" aria-hidden="true"></div>
+    <div class="first-section">
+        <!-- first-left end-->
+        <div class="first-right">
+            <button type="button" class="btn btn-warning btn-primary" data-toggle="modal" data-target="#addMarket">添加销售经理</button>
+        </div>
+    </div>
+    <!--first-section end -->
+    <!--second-section-->
+    <div class="second-section">
+        <table class="table" ng-app='perApp'>
+            <tr class='title'>
+                <th>姓名</th>
+                <th>联系电话</th>
+                <th>备注</th>
+                <th>数据</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat='per in pers'>
+                <td>{{per.name}}</td>
+                <td>{{per.phone}}</td>
+                <td>{{per.remark}}</td>
+                <td>..</td>
+                <td>
+                    <button type="button" class="btn btn-info btn-primary" data-toggle="modal" data-target="#editMarket" ng-click='editMarket(per.id)'>编辑</button>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+        </table>
+
+
+
+    </div>
+
+
+
+    <!-- 添加销售经理 Modal -->
+    <div class="modal fade myModal" id="addMarket" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+        data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputName1" class="col-sm-2 control-label">
+                                <span id='sign'>*</span>姓名
+                            </label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="inputName1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName2" class="col-sm-2 control-label">
+                                <span id='sign'>*</span>联系电话
+                            </label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="inputName2" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="modal-footer ">
+                            <button type="button" class="btn btn-warning">保存</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal end-->
+
+    <!-- 编辑销售 -->
+    <div class="modal fade myModal" id="editMarket" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  aria-hidden="true"
+        data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputName1" class="col-sm-2 control-label">
+                                <span id='sign'>*</span>姓名
+                            </label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="inputName1" ng-model='name'>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName2" class="col-sm-2 control-label">
+                               <span id='sign'>*</span>联系电话
+                            </label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="inputName2" ng-model='phone'>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control"  ng-model='remark'>
+                            </div>
+                        </div>
+                        <div class="modal-footer ">
+                            <button type="button" class="btn btn-warning" ng-disabled="incomplete">保存</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

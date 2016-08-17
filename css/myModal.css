@@ -1,0 +1,24 @@
+
+/*modal*/
+.myModal .close span {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.myModal .modal-content {
+    width: 100%;
+}
+
+.myModal .form-control {
+    margin-right: 10px;
+}
+
+/*myModal addMarket manager2 新增销售*/
+
+.myModal #sign {
+    color: #ff5d17;
+    margin-right: 5px;
+}
+
+
+/*main.html 维护 历史记录*/

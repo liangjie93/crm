@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src='js/bootstrap.min.js'></script>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/angular-route/1.3.13/angular-route.js"></script>
+
+    <style>
+        <span style="font-family:SimSun;font-size:14px;">
+        /* app css stylesheet */
+        
+        html,
+        body {
+            height: 100%;
+        }
+        
+        .wrap {
+            min-height: 100%;
+            height: auto !important;
+            height: 100%;
+            margin: 0 auto -80px;
+        }
+        
+        .header {
+            height: 100%;
+            min-height: 100%;
+            height: auto !important;
+        }
+        
+        .footer {
+            background-color: #333;
+            color: white;
+            height: 80px;
+        }
+        
+        .container .credit {
+            margin: 10px 0;
+        }
+        
+        #login {
+            margin: 10% 0 0 45%;
+        }
+        
+        #login .title label {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        
+        #register .title label {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        
+        </span>
+    </style>
+</head>
+
+<body ng-app='login'>
+    <div id="login"  ng-controller="login">
+        <form class="form-horizontal">
+            <div class="title control-group">
+                <label class="control-label" for="inputEmail">Login</label>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="inputEmail">Email</label>
+                <div class="controls">
+                    <input type="text" id="inputEmail" placeholder="Email" ng-model="login.email">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="inputPassword">Password</label>
+                <div class="controls">
+                    <input type="password" id="inputPassword" placeholder="Password" ng-model="login.password">
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <label class="checkbox">  
+              <input type="checkbox"> Remember me  
+            </label>
+                    <button type="button" class="btn btn-success" ng-click="login.submit()">Sign in</button>
+                    <button type="button" class="btn btn-success" ng-click="regist.submit()">regist</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <script>
+var services = angular.module('login', []).  
+    value('version', '1.0');    
+    
+services.factory('LoginService', ['$resource', function ($resource) {  
+  return $resource('fakeData/userLogin.json', {}, {  
+    login: {method: 'GET', params: {}, isArray: false}  
+  });  
+}]); 
+
+/* Controllers */  
+var controllers = angular.module('login', []);  
+controllers.controller('LoginCTRL', ['$scope', 'LoginService', function ($scope, LoginService) {  
+  $scope.login = {};  
+  $scope.login.submit = function() {  
+    console.log($scope.login.email);  
+    console.log($scope.login.password);  
+    // do some process, invoke the service layer  
+    LoginService.login(  
+      {},  
+      {  
+        email: $scope.login.email,  
+        password: $scope.login.password  
+      },  
+      function (success) {  
+        if (success.status == "success") {  
+          alert('login success');  
+        } else {  
+          // error message  
+        }  
+      },  
+      function (error) {  
+        // error message  
+      }  
+    );  
+  };  
+}]);  
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+a {
+    color:#fff;  
+}
+
+div {
+    display: block;
+}
+
+.header {
+    height: 50px;
+    background-color: lightblue;
+}
+/*.left-container*/
+.left-container {
+    position: absolute;
+    top: 53px;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    background-color: #d7d7d7;
+    overflow-y: auto;
+}
+
+.left-container ul {
+    margin-top: 30px;
+}
+
+/*.left-container #present {
+    background-color: #ff5d17;
+}*/
+.nav>li>a:focus,
+.nav>li>a:hover {
+    background-color: #ff5d17;
+}
+
+.left-container .nav a {
+    background-color: #333333;
+    text-align: center;
+ 
+}
+/*.right-container*/
+.right-container {
+    /*background-color: #333333;*/
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 200px;
+    right: 0;
+    overflow-y: auto;
+    margin-left: 10px;
+}
+
+.right-container .user {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+}
+
+.right-container .first-section {
+    margin-top: 70px;
+    width: 100%;
+    height: 50px;
+}
+
+.right-container .first-section .first-left {
+    margin-left: 5px;
+    float: left;
+}
+
+.first-left select {
+    font-size: 12px;
+
+}
+.first-left .search input {
+    background-color: #ff5d17;
+}
+.first-left .search #auto_div{
+    display: none;
+    width: 100%;
+    border: 1px #74c0f9 solid;
+    background: #FFF;
+    position: absolute;
+    top: 35px;
+    left: 0;
+    color: #323232;
+}
+.first-left .search .btn {
+    margin-left: 5px;
+     background-color: #ff5d17;
+}
+
+
+
+/*first-left end*/
+.first-right {
+    float: right;
+    margin-right: 10px;
+}
+/*.second-section begin*/
+.second-section {
+    margin-top: 40px;
+}
+.second-section .table .title th {
+    /*background-color: #fff;*/
+    text-align: center;
+}
+
+.second-section .table td {
+    text-align: center;
+}
+
+/*edit*/
+#addClient {
+    margin: 50px 0 0 20px;
+}
+#addClient #sign{
+    color:#f00;
+    margin-right: 10px;
+}
+#addClient .contact{
+    float: left;
+}
+
+#addClient .glyphicon {
+    cursor: pointer;
+    line-height: 34px;
+}
+#addClient #plus {
+    color: blue;
+}
+#addClient #del {
+    color: #ff0000;
+}
