@@ -1,6 +1,6 @@
 
 //测试用的数据
-var test_list = ["小张", "小苏", "小杨", "老张", "老苏", "老杨", "老爷爷", "小妹妹", "老奶奶", "大鹏", "大明", "大鹏展翅", "你好", "hello", "hi",'li'];
+var test_list = ["浙江-000", "浙江-111", "浙江-122", "浙江-123", "浙江-211", "浙江-222", "浙江-223", "浙江-311", "浙江-322", "浙江-333", "浙江-411", "浙江-422", "浙江-433", "浙江-511", "浙江-522",'浙江-533'];
 var old_value = "";
 var highlightindex = -1;   //高亮
 
@@ -24,7 +24,7 @@ function AutoComplete(auto, search, mylist) {
         autoNode.empty();  //清空上次的记录
         for (i in carlist) {
             var wordNode = carlist[i];   //弹出框里的每一条内容
-            
+
             var newDivNode = $("<div>").attr("id", i);    //设置每个节点的id值
             newDivNode.attr("style", "font:14px/25px arial;height:25px;padding:0 8px;cursor: pointer;");
 
