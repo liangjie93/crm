@@ -10,10 +10,10 @@
 app.controller('infoCtrl', function ($scope) {
 
     $scope.infos = [
-        {id: 1 , company: 'zj', contact: '12', department: '22', products: 'L', price: '121W', progress: '...', manager: 'who', date: '121' },
-        {id: 2 , company: 'zj', contact: '12', department: '22', products: 'L', price: '121W', progress: '...', manager: 'who', date: '121' },
-        {id: 3 , company: 'zj', contact: '12', department: '22', products: 'L', price: '121W', progress: '...', manager: 'who', date: '121' },
-        {id: 4 , company: 'zj', contact: '12', department: '22', products: 'L', price: '121W', progress: '...', manager: 'who', date: '121' }
+        {id: 1 , company: 'zj', product: '12', department: '22', products: 'L', price: '121W', progress: '...', manager: 'who', date: '121' },
+        {id: 2 , company: 'zj', product: '12', department: '22', products: 'L', price: '121W', progress: '...', manager: 'who', date: '121' },
+        {id: 3 , company: 'zj', product: '12', department: '22', products: 'L', price: '121W', progress: '...', manager: 'who', date: '121' },
+        {id: 4 , company: 'zj', product: '12', department: '22', products: 'L', price: '121W', progress: '...', manager: 'who', date: '121' }
     ];
 })
 
@@ -159,20 +159,20 @@ app.controller('manager2Ctrl', function ($scope) {
 
     function productCtrl($scope) {
 
-      $scope.contacts = [
+      $scope.products = [
         {type:''},
       
         ];
 
      $scope.purposes = ['lala','lalala']
 
-      $scope.addContact = function() {
-        $scope.contacts.push({type:''});
+      $scope.addProduct = function() {
+        $scope.products.push({type:''});
       };
 
-      $scope.removeContact = function(contactToRemove) {
-        var index = $scope.contacts.indexOf(contactToRemove);
-        $scope.contacts.splice(index, 1);
+      $scope.removeProduct = function(productToRemove) {
+        var index = $scope.products.indexOf(productToRemove);
+        $scope.products.splice(index, 1);
       };
 
 
