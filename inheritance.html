@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-ngController-production</title>
+  
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+
+  <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script> -->
+<!--   <script src="app.js"></script>
+ -->  
+
+  
+</head>
+<body ng-app="controllerExample">
+<div ng-controller="productCtrl">
+
+     <select ng-model="contact.type" id="select_{{$index}}" ng-options='purpose for purpose in purposes'>
+         <option value="">专业导播台</option>
+      </select>
+      <input type="text" ng-model="contact.value" aria-labelledby="select_{{$index}}" />
+       <span ng-click="addContact()">add</span>
+      
+    <div ng-repeat="contact in contacts" style="list-style:none">
+      <select ng-model="contact.type" id="select_{{$index}}" ng-options='purpose for purpose in purposes'>
+         <option value="">专业导播台</option>
+      </select>
+      <input type="text" ng-model="contact.value" aria-labelledby="select_{{$index}}" />
+       
+      <span ng-click="removeContact(contact)">X</span>
+    </div>
+ 
+
+</div>
+    
+
+    <script>
+(function(angular) {
+  'use strict';
+  angular.module('controllerExample', [])
+  .controller('productCtrl', ['$scope', productCtrl]);
+
+	function productCtrl($scope) {
+
+	  $scope.contacts = [
+	    {type:'', value:''},
+	    // {type:'email', value:''}
+	    ];
+
+	 $scope.purposes = ['lala','lalala']
+
+	  $scope.addContact = function() {
+	    $scope.contacts.push({type:'', value:''});
+	  };
+
+	  $scope.removeContact = function(contactToRemove) {
+	    var index = $scope.contacts.indexOf(contactToRemove);
+	    $scope.contacts.splice(index, 1);
+	  };
+
+
+	}
+})(window.angular);
+    </script>
+
+</body>
+</html>

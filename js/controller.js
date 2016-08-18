@@ -140,19 +140,38 @@ app.controller('manager2Ctrl', function ($scope) {
 
 
 //addClient
-app.controller('optionPurpose',function($scope){
-	$scope.purposes = ['lala','lalala']
-})
-        
 
-app.controller('operateCtrl', function(){
-    $(document).ready(function($){
-         $('#plus').bind('click',function(){
-            console.log(1);
-            $(this).parent().parent().append('<label style="margin-top: 10px;" class="col-sm-2 control-label"></label><div style="margin-top: 10px;"><div class="col-sm-4" ng-controller="optionPurpose"><select class="form-control" id="inputName1" ng-model="selectPurpose" ng-options="purpose for purpose in purposes"><option value="1">下拉选择</option></select></div><div class="col-sm-2"><input type="text" class="form-control" placeholder="请输入报价"></div><div class="glyphicon glyphicon-remove" id="del" aria-hidden="true"></div></div>')
-        })
-        
-    })
-    
+// app.controller('operateCtrl', function(){
+//      angular.element('#plus').bind('click',function(){
+//         console.log(1);
+//         angular.element(this).parent().parent().append('<div style="margin-top: 10px;"><label style="margin-top: 10px;" class="col-sm-2 control-label"></label><div class="col-sm-4" ng-controller="productCtrl"><select class="form-control" id="inputName1" ng-model="product" ng-options="product for product in products"><option value="1">下拉选择</option></select></div><div class="col-sm-2"><input type="text" class="form-control" placeholder="请输入报价"></div><div class="glyphicon glyphicon-remove" id="del" aria-hidden="true"></div></div>')
+//     })
    
-})
+// })
+
+
+(function(angular) {
+    'use strict';
+    app.controller('productCtrl', ['$scope', productCtrl]);
+
+function productCtrl($scope) {
+
+  $scope.product = [
+    {type:''},
+  ];
+
+ $scope.purposes = ['lala','lalala']
+
+  $scope.addContact = function() {
+    $scope.product.push({type:''});
+  };
+
+  $scope.removeContact = function(contactToRemove) {
+    var index = $scope.product.indexOf(contactToRemove);
+    $scope.product.splice(index, 1);
+  };
+
+
+}
+})(window.angular);
+
