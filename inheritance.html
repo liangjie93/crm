@@ -12,7 +12,7 @@
 
   
 </head>
-<body ng-app="controllerExample">
+<body ng-app="myApp">
 <div ng-controller="productCtrl">
 
      <select ng-model="contact.type" id="select_{{$index}}" ng-options='purpose for purpose in purposes'>
@@ -35,22 +35,23 @@
     
 
     <script>
+    var app = angular.module('myApp', []);
 (function(angular) {
   'use strict';
-  angular.module('controllerExample', [])
-  .controller('productCtrl', ['$scope', productCtrl]);
+  
+  app.controller('productCtrl', ['$scope', productCtrl]);
 
 	function productCtrl($scope) {
 
 	  $scope.contacts = [
-	    {type:'', value:''},
-	    // {type:'email', value:''}
+	    {type:''},
+	  
 	    ];
 
 	 $scope.purposes = ['lala','lalala']
 
 	  $scope.addContact = function() {
-	    $scope.contacts.push({type:'', value:''});
+	    $scope.contacts.push({type:''});
 	  };
 
 	  $scope.removeContact = function(contactToRemove) {

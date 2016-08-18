@@ -150,28 +150,32 @@ app.controller('manager2Ctrl', function ($scope) {
 // })
 
 
+    var app2 = angular.module('myApp', []);
+    app2.controller('productCtrl',function($scope){});
 (function(angular) {
-    'use strict';
-    app.controller('productCtrl', ['$scope', productCtrl]);
+  'use strict';
+  
+  app.controller('productCtrl', ['$scope', productCtrl]);
 
-function productCtrl($scope) {
+    function productCtrl($scope) {
 
-  $scope.product = [
-    {type:''},
-  ];
+      $scope.contacts = [
+        {type:''},
+      
+        ];
 
- $scope.purposes = ['lala','lalala']
+     $scope.purposes = ['lala','lalala']
 
-  $scope.addContact = function() {
-    $scope.product.push({type:''});
-  };
+      $scope.addContact = function() {
+        $scope.contacts.push({type:''});
+      };
 
-  $scope.removeContact = function(contactToRemove) {
-    var index = $scope.product.indexOf(contactToRemove);
-    $scope.product.splice(index, 1);
-  };
+      $scope.removeContact = function(contactToRemove) {
+        var index = $scope.contacts.indexOf(contactToRemove);
+        $scope.contacts.splice(index, 1);
+      };
 
 
-}
+    }
 })(window.angular);
 
