@@ -32,14 +32,16 @@ div {
 /*.left-container #present {
     background-color: #ff5d17;
 }*/
-.nav>li>a:focus,
-.nav>li>a:hover {
+
+.nav>li>a:hover{
     background-color: #ff5d17;
+    color:#fff;
 }
 
 .left-container .nav a {
     background-color: #333333;
     text-align: center;
+    color: #fff;
  
 }
 /*.right-container*/

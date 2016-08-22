@@ -29,27 +29,29 @@
             <label class="col-sm-2 control-label">产品意向:</label>
             <div>
                 <div class="col-sm-4">
-                    <select class="form-control" id="inputName1"  ng-model='product.type' ng-options='product for product in products'>
-                        <option value="">专业导播台</option>
-                    </select>
-                </div>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control"  placeholder="价格">
-                </div>
-                <div class="glyphicon glyphicon-plus" id='plus' aria-hidden="true" ng-click="addProduct()"></div>
-            </div>
-
-            <div>
-                <label class="col-sm-2 control-label"></label>
-                <div class="col-sm-4" ng-controller='productCtrl'>
-                    <select class="form-control" id="inputName1" ng-model='product.type' ng-options='product for product in products'>
+                    <select class="form-control"  ng-model='product.type' ng-options='purpose for purpose in purposes'>
                         <option value="">下拉选择</option>
                     </select>
                 </div>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" placeholder="请输入报价">
+                    <input type="text" class="form-control"  placeholder="价格" ng-model="product.value">
                 </div>
-                <div class="glyphicon glyphicon-remove" id='del' aria-hidden="true" ng-click="removeProduct(product)"></div>
+                <div class="glyphicon glyphicon-plus" id='plus' aria-hidden="true" ng-click="addProduct()"></div>
+
+                <div id='newProduct' ng-repeat="product in products" style='margin-top:5px;'>
+                    <label class="col-sm-2 control-label"></label>
+                    <div class="col-sm-4">
+                        <select class="form-control" ng-model='product.type' ng-options='purpose for purpose in purposes'>
+                            <option value="">下拉选择</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" placeholder="请输入报价">
+                    </div>
+                    <div class="glyphicon glyphicon-remove" id='del' aria-hidden="true" ng-click="removeProduct(product)">
+                    </div>
+                </div>
+                    
             </div>
         </div>
 
@@ -78,5 +80,5 @@
         </div>
     </form>
 
-   
+
 </div>

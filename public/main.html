@@ -16,8 +16,8 @@
     <div class="header">qukan</div>
     <div class="left-container">
         <ul class='nav nav-pills nav-stacked'>
-            <li role="presentation"><a href="#/manager1">客户关系管理</a></li>
-            <li role="presentation"><a href="#/manager2">销售人员管理</a></li>
+            <li role="presentation"><a href="#/manager1" id='manager1'>客户关系管理</a></li>
+            <li role="presentation"><a href="#/manager2" id='manager2'>销售人员管理</a></li>
         </ul>
     </div>
 
@@ -66,6 +66,17 @@
     <script src='js/app.js'></script>
     <script src='js/route.js'></script>
     <script src='js/controller.js'></script>
+    <script>
+        $('#manager1').click(function(){
+            $(this).css('background-color','#ff5d17');
+            $('#manager2').css('background-color','#333');
+        });
+        $('#manager2').click(function(){
+            $(this).css('background-color','#ff5d17');
+            $('#manager1').css('background-color','#333');
+        });
+
+    </script>
   
    
     

@@ -1,12 +1,5 @@
 //manager1
 
-// app.controller('searchCtrl', function ($scope) {
-//     $scope.toogle = function () {
-//         $scope.tip = true;
-//         $scope.tip = !$scope.tip;
-//     }
-// })
-
 app.controller('infoCtrl', function ($scope) {
 
     $scope.infos = [
@@ -17,7 +10,7 @@ app.controller('infoCtrl', function ($scope) {
     ];
 })
 
-app.controller('optionSalesman', function($scope){
+app.controller('optionSalesman', function($scope){  //manager11 addClient
 	$scope.salesmans = ['liu','zhang','li','zhou']
 })
 
@@ -141,41 +134,22 @@ app.controller('manager2Ctrl', function ($scope) {
 
 //addClient
 
-// app.controller('operateCtrl', function(){
-//      angular.element('#plus').bind('click',function(){
-//         console.log(1);
-//         angular.element(this).parent().parent().append('<div style="margin-top: 10px;"><label style="margin-top: 10px;" class="col-sm-2 control-label"></label><div class="col-sm-4" ng-controller="productCtrl"><select class="form-control" id="inputName1" ng-model="product" ng-options="product for product in products"><option value="1">下拉选择</option></select></div><div class="col-sm-2"><input type="text" class="form-control" placeholder="请输入报价"></div><div class="glyphicon glyphicon-remove" id="del" aria-hidden="true"></div></div>')
-//     })
-   
-// })
-
-
-    var app2 = angular.module('myApp', []);
-    app2.controller('productCtrl',function($scope){});
-(function(angular) {
-  'use strict';
-  
-  app.controller('productCtrl', ['$scope', productCtrl]);
-
-    function productCtrl($scope) {
-
-      $scope.products = [
-        {type:''},
-      
-        ];
-
-     $scope.purposes = ['lala','lalala']
-
-      $scope.addProduct = function() {
+app.controller('productCtrl', ['$scope', productCtrl]);
+function productCtrl($scope) {
+    $scope.products = [{type:''}];
+    $scope.purposes = ['专业导播台','lala','lalala']
+    $scope.addProduct = function() {
         $scope.products.push({type:''});
-      };
-
-      $scope.removeProduct = function(productToRemove) {
-        var index = $scope.products.indexOf(productToRemove);
+    };
+    $scope.removeProduct = function(contactToRemove) {
+        var index = $scope.products.indexOf(contactToRemove);
         $scope.products.splice(index, 1);
-      };
+    };
+
+}
 
 
-    }
-})(window.angular);
+
+
+
 
