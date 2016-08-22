@@ -108,12 +108,12 @@ div {
     margin-top: 40px;
 }
 .second-section .table .title th {
-    /*background-color: #fff;*/
     text-align: center;
 }
 
 .second-section .table td {
     text-align: center;
+    vertical-align:middle;
 }
 
 /*edit*/

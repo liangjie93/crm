@@ -1,23 +1,18 @@
 //manager1
 
-app.controller('infoCtrl', function ($scope) {
-
-    $scope.infos = [
-        {id: 1 , company: 'zj', product: '12', department: '22', products: 'L', price: '121W', progress: '...', manager: 'who', date: '121' },
-        {id: 2 , company: 'zj', product: '12', department: '22', products: 'L', price: '121W', progress: '...', manager: 'who', date: '121' },
-        {id: 3 , company: 'zj', product: '12', department: '22', products: 'L', price: '121W', progress: '...', manager: 'who', date: '121' },
-        {id: 4 , company: 'zj', product: '12', department: '22', products: 'L', price: '121W', progress: '...', manager: 'who', date: '121' }
-    ];
+app.controller('infoCtrl', function ($scope,$http) {
+    $http.get("../json/myJson.json").success(function(response) {$scope.infos = response.infos;});
+    
 })
 
-app.controller('optionSalesman', function($scope){  //manager11 addClient
-	$scope.salesmans = ['liu','zhang','li','zhou']
+app.controller('optionSalesman', function($scope,$http){  //manager11、addClient
+    $http.get("../json/myJson.json").success(function(response) {$scope.salesmans = response.salesmans;});
 })
 
-app.controller('searchCtrl',function(){
+app.controller('searchCtrl',function($scope,$http){
 
     //测试用的数据
-    var test_list = ["浙江-000", "浙江-111", "浙江-122", "浙江-123", "上海-211", "上海-222", "浙江-223", "浙江-311", "北京-322", "浙江-333", "浙江-411", "北京-422", "北京-433", "浙江-511", "浙江-522",'浙江-533'];
+    var list = ["浙江-000", "浙江-111", "浙江-122", "浙江-123", "上海-211", "上海-222", "浙江-223", "浙江-311", "北京-322", "浙江-333", "浙江-411", "北京-422", "北京-433", "浙江-511", "浙江-522",'浙江-533'];
     var old_value = "";
     var highlightindex = -1;   //高亮
 
@@ -95,31 +90,25 @@ app.controller('searchCtrl',function(){
         old_value = $("#search_text").val();
         $("#search_text").focus(function () {
             if ($("#search_text").val() == "") {
-                AutoComplete("auto_div", "search_text", test_list);
+                AutoComplete("auto_div", "search_text", list);
             }
         });
 
         $("#search_text").keyup(function () {
-            AutoComplete("auto_div", "search_text", test_list);
+            AutoComplete("auto_div", "search_text", list);
         });
     });
 
 })
 
 //manager2
-app.controller('manager2Ctrl', function ($scope) {
-    $scope.pers = [
-        {id: 1 , name: 'li', phone: '123' ,remark: '555'},
-        {id: 2 , name: 'zi', phone: '222' ,remark: '555'},
-        {id: 2 , name: 'll', phone: '133' ,remark: '555'}
-    ];
+app.controller('manager2Ctrl', function ($scope,$http) {
+    $http.get("../json/myJson.json").success(function(response) {$scope.pers = response.pers;});
     $scope.editMarket = function(id){
     	$scope.name = $scope.pers[id-1].name;
 		$scope.phone = $scope.pers[id-1].phone;
 		$scope.remark = $scope.pers[id-1].remark;
-
     }
-
     $scope.$watch('name',function(){$scope.test();});
     $scope.$watch('phone',function(){$scope.test();});
     $scope.test = function(){	
@@ -134,10 +123,9 @@ app.controller('manager2Ctrl', function ($scope) {
 
 //addClient
 
-app.controller('productCtrl', ['$scope', productCtrl]);
-function productCtrl($scope) {
+app.controller('productCtrl',function($scope,$http){
     $scope.products = [{type:''}];
-    $scope.purposes = ['专业导播台','lala','lalala']
+    $http.get("../json/myJson.json").success(function(response) {$scope.purposes = response.purposes;});
     $scope.addProduct = function() {
         $scope.products.push({type:''});
     };
@@ -145,9 +133,7 @@ function productCtrl($scope) {
         var index = $scope.products.indexOf(contactToRemove);
         $scope.products.splice(index, 1);
     };
-
-}
-
+});
 
 
 
