@@ -117,24 +117,24 @@ div {
 }
 
 /*edit*/
-#addClient {
+.client {
     margin: 50px 0 0 20px;
 }
-#addClient #sign{
+.client .sign{
     color:#f00;
     margin-right: 10px;
 }
-#addClient .contact{
+.client .contact{
     float: left;
 }
 
-#addClient .glyphicon {
+.client .glyphicon {
     cursor: pointer;
     line-height: 34px;
 }
-#addClient #plus {
+.client #plus {
     color: blue;
 }
-#addClient #del {
+.client #del {
     color: #ff0000;
 }

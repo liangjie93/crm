@@ -1,13 +1,15 @@
 //manager1
 
-app.controller('infoCtrl', function ($scope,$http) {
+app.controller('manager1Ctrl', function ($scope,$http) {
     $http.get("../json/myJson.json").success(function(response) {$scope.infos = response.infos;});
-    
-})
+    $scope.editClient = function(id){
+        $scope.company = $scope.infos[id-1].company;
+    }
+});
 
 app.controller('optionSalesman', function($scope,$http){  //manager11、addClient
     $http.get("../json/myJson.json").success(function(response) {$scope.salesmans = response.salesmans;});
-})
+});
 
 app.controller('searchCtrl',function($scope,$http){
 
@@ -99,7 +101,7 @@ app.controller('searchCtrl',function($scope,$http){
         });
     });
 
-})
+});
 
 //manager2
 app.controller('manager2Ctrl', function ($scope,$http) {
@@ -118,7 +120,7 @@ app.controller('manager2Ctrl', function ($scope,$http) {
   			$scope.incomplete = false;
   		}	
     }
-})
+});
 
 
 //addClient
