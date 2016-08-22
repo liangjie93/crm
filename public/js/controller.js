@@ -1,11 +1,23 @@
 //manager1
 
-app.controller('manager1Ctrl', function ($scope,$http) {
+app.controller('infoCtrl', function ($scope,$http) {
+    $http.get("../json/myJson.json").success(function(response) {
+        $scope.infos = response.infos;});
+});
+
+app.controller('editClient', function($scope){
     $http.get("../json/myJson.json").success(function(response) {$scope.infos = response.infos;});
     $scope.editClient = function(id){
         $scope.company = $scope.infos[id-1].company;
+        $scope.contact = $scope.infos[id-1].contact;
+        $scope.cusPhone = $scope.infos[id-1].cusPhone;
+        $scope.products = $scope.infos[id-1].products;
+        $scope.price = $scope.infos[id-1].price;
+        $scope.progress = $scope.infos[id-1].progress;
+        $scope.manager = $scope.infos[id-1].manager;
+        $scope.date = $scope.infos[id-1].date;
     }
-});
+})
 
 app.controller('optionSalesman', function($scope,$http){  //manager11、addClient
     $http.get("../json/myJson.json").success(function(response) {$scope.salesmans = response.salesmans;});

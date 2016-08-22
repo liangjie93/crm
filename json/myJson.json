@@ -1,12 +1,12 @@
 {
 	"infos":
 	[
-        {"id": "1" , "company": "zj1", "contact" : "LLL" , "department" : "技术部" , "cusPhone" : "111" , "testAccount" : "zzz" , "products" : "11", "price" : "12", "progress": "...", "manager": "who", "date": "121" },
+        {"id": "1" , "company": "zj1", "contact" : "LLL" , "department" : "技术部" , "cusPhone" : "111" , "testAccount" : "zzz" , "products" : ["11","22"], "price" : "12", "progress": "...", "manager": "who", "date": "121" },
         {"id": "2" , "company": "zj2", "contact" : "LLL" , "department" : "技术部" , "cusPhone" : "111" , "testAccount" : "zzz" , "products" : "21", "price" : "12", "progress": "...", "manager": "who", "date": "121" },
-        {"id": "3" , "company": "zj3", "contact" : "LLL" , "department" : "技术部" , "cusPhone" : "111" , "testAccount" : "zzz" , "products" : "31", "price" : "12", "progress": "...", "manager": "who", "date": "121" },
+        {"id": "3" , "company": "zj3", "contact" : "LLL" , "department" : "技术部" , "cusPhone" : "111" , "testAccount" : "zzz" , "products" : ["31","32"], "price" : "12", "progress": "...", "manager": "who", "date": "121" },
         {"id": "4" , "company": "zj4", "contact" : "LLL" , "department" : "技术部" , "cusPhone" : "111" , "testAccount" : "zzz" , "products" : "41", "price" : "12", "progress": "...", "manager": "who", "date": "121" }
     ],
-    
+
     "pers":
 	[
         {"id": "1" , "name": "li", "phone": "123" ,"remark": "555"},
