@@ -114,7 +114,7 @@ div {
     vertical-align:middle;
 }
 
-/*edit*/
+/*addClient*/
 .client {
     margin: 50px 0 0 20px;
 }
@@ -136,21 +136,16 @@ div {
 .client #del {
     color: #ff0000;
 }
-/*add*/
-.upload{
-    width: 100%;
-   /*display:inline-block; */
-   /*position:relative;*/
-    /*overflow:hidden;*/
-}
-.upload  input {
 
-   position:absolute; 
-   /*right:0; */
-   top:0; 
-   opacity:0; 
-   filter:alpha(opacity=0);
-   cursor: pointer;
+.upload input {
+    width: 100%;
+    height: 100%;
+    position:absolute; 
+    right:0; 
+    top:0; 
+    opacity:0; 
+    filter:alpha(opacity=0);
+    cursor: pointer;
 }
 .upload img {
      max-width:300px;

@@ -4,7 +4,7 @@
         {"id": "1" , "company": "浙江11", "contact" : "LLL" , "department" : "技术部" , "cusPhone" : "111" , "testAccount" : "zzz" , "products" : ["11","22","33"], "price" : "12", "progress": "...", "manager": "who1", "date": "121" },
         {"id": "2" , "company": "浙江22", "contact" : "LLL" , "department" : "技术部" , "cusPhone" : "112" , "testAccount" : "zzz" , "products" : ["21","22"], "price" : "12", "progress": "...", "manager": "who2", "date": "121" },
         {"id": "3" , "company": "zj33", "contact" : "LLL" , "department" : "技术部" , "cusPhone" : "111" , "testAccount" : "zzz" , "products" : ["31","32"], "price" : "12", "progress": "...", "manager": "who3", "date": "121" },
-        {"id": "4" , "company": "zj44", "contact" : "LLL" , "department" : "技术部" , "cusPhone" : "111" , "testAccount" : "zzz" , "products" : ["41","44"], "price" : "12", "progress": "...", "manager": "who4", "date": "121" }
+        {"id": "4" , "company": "zj44", "contact" : "LLL" , "department" : "技术部" , "cusPhone" : "111" , "testAccount" : "zzz" , "products" : ["41"], "price" : "12", "progress": "...", "manager": "who4", "date": "121" }
     ],
     "tip":
     [
@@ -16,8 +16,8 @@
     "pers":
 	[
         {"id": "1" , "name": "li", "phone": "123" ,"remark": "555"},
-        {"id": "2" , "name": "li", "phone": "123" ,"remark": "555"},
-        {"id": "2" , "name": "ll", "phone": "133" ,"remark": "555"}
+        {"id": "2" , "name": "z", "phone": "122" ,"remark": "555"},
+        {"id": "3" , "name": "w", "phone": "133" ,"remark": "555"}
     ],
     "salesmans":
     [

@@ -48,24 +48,24 @@
                 <th>最新维护日期</th>
                 <th>操作</th>
             </tr>
-            <tr ng-repeat='item in infos'>
-                <td>{{item.company}}</td>
+            <tr ng-repeat='info in infos'>
+                <td>{{info.company}}</td>
                 <td>
-                    <p>{{item.contact}}
-                    <p>{{item.department}}
-                    <p>{{item.cusPhone}}
-                    <p>测试账号：{{item.testAccount}}
+                    <p>{{info.contact}}
+                    <p>{{info.department}}
+                    <p>{{info.cusPhone}}
+                    <p>测试账号：{{info.testAccount}}
                 </td>
                 <td>
-                    <p ng-repeat="list in item.products">{{list}}</p>
+                    <p ng-repeat="list in info.products">{{list}}</p>
                 </td>
-                <td>{{item.price}}W</td>
-                <td>{{item.progress}}</td>
-                <td>{{item.manager}}</td>
-                <td>{{item.date}}</td>
+                <td>{{info.price}}W</td>
+                <td>{{info.progress}}</td>
+                <td>{{info.manager}}</td>
+                <td>{{info.date}}</td>
                 <td>
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#maintain">查看进展</button>
-                    <a href="#/manager1/addClient"><button type="button" class="btn btn-info" ng-click='editClient(infos.id)'>编辑</button></a>
+                    <button type="button" class="btn btn-info btn-primary" data-toggle="modal" data-target="#editClient"  ng-click='editClient(info.id)'>编辑</button>
                     <button type="button" class="btn btn-danger">删除</button>
                 </td>
             </tr>
@@ -74,8 +74,7 @@
     <!--second-section end-->
 
      <!-- 编辑客户经理 Modal -->
-    <!-- <div class="modal fade myModal" id="editClient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  aria-hidden="true"
-        data-backdrop="static">
+    <div class="modal fade myModal client" id="editClient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -95,15 +94,15 @@
                         <div class="form-group">
                             <label for="inputName2" class="col-sm-2 control-label"><span class='sign'>*</span>联系人:</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control contact" id="inputName2" placeholder="姓名">
+                                <input type="text" class="form-control contact" id="inputName2" placeholder="姓名" ng-model='contact'>
                             </div>
-                            <div class="col-sm-2"> <input type="text" class="form-control contact" id="inputName3" placeholder="联系电话"></div>
-                            <div class="col-sm-2"><input type="text" class="form-control contact" id="inputName4" placeholder="部门或职位"></div>
+                            <div class="col-sm-2"> <input type="text" class="form-control contact" id="inputName3" placeholder="联系电话" ng-model='cusPhone'></div>
+                            <div class="col-sm-2"><input type="text" class="form-control contact" id="inputName4" placeholder="部门或职位" ng-model='department'></div>
                         </div>
                         <div class="form-group" ng-controller='optionSalesman'>
                             <label class="col-sm-2 control-label">销售经理:</label>
                             <div class="col-sm-4">
-                                <select class="form-control"  ng-model='selectSalesman' ng-options='name for name in salesmans'>
+                                <select class="form-control" ng-model='selectSalesman' ng-options='name for name in salesmans'>
                                 </select>
                             </div>
                         </div>
@@ -139,7 +138,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">测试账号:</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" placeholder="请输入测试账号">
+                                <input type="text" class="form-control" placeholder="请输入测试账号" ng-model='testAccount'>
                             </div>
                         </div>
                         <div class="form-group">
@@ -150,8 +149,12 @@
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label"><span class='sign'>*</span>上传名片或营业执照:</label>
-                            <div class="col-sm-4">
-                                <button type="button" class="btn btn-warning">上传图片控件</button>
+                            <div class="col-sm-4" ng-controller="UploaderController">
+                                <div class='upload'>                   
+                                    <button type="button" class="btn btn-warning" style='width: 100%;'>上传图片</button>
+                                    <input type="file" file-model="myFile"/> 
+                                    <img ng-src="{{imageSrc}}"/>
+                               </div>                
                             </div>
                         </div> 
                         <div class="form-group" style='text-align: center;'>
@@ -164,7 +167,7 @@
 
             </div>
         </div>
-    </div> -->
+    </div>
 
     <!-- 编辑客户 end -->
 

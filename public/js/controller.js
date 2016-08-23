@@ -1,29 +1,7 @@
-//manager1
+//manager1页面
 
 app.controller('infoCtrl', function ($scope,$http) {
     $http.get("../data/myJson.json").success(function(response) {$scope.infos = response.infos;});
-});
-
-app.controller('editClient', function($scope){
-    $http.get("../data/myJson.json").success(function(response) {$scope.infos = response.infos;});
-    $scope.editClient = function(id){
-        $scope.company = $scope.infos[id-1].company;
-        $scope.contact = $scope.infos[id-1].contact;
-        $scope.cusPhone = $scope.infos[id-1].cusPhone;
-        $scope.products = $scope.infos[id-1].products;
-        $scope.price = $scope.infos[id-1].price;
-        $scope.progress = $scope.infos[id-1].progress;
-        $scope.manager = $scope.infos[id-1].manager;
-        $scope.date = $scope.infos[id-1].date;
-    }
-})
-
-app.controller('optionSalesman', function($scope,$http){  //manager11、addClient
-    $http.get("../data/myJson.json").success(function(response) {
-        $scope.salesmans = response.salesmans;
-
-    });
-
 
 });
 
@@ -129,27 +107,59 @@ app.controller('searchCtrl',function($scope,$http){
     });
 });
 
-//manager2
-app.controller('manager2Ctrl', function ($scope,$http) {
-    $http.get("../data/myJson.json").success(function(response) {$scope.pers = response.pers;});
-    $scope.editMarket = function(id){
-    	$scope.name = $scope.pers[id-1].name;
-		$scope.phone = $scope.pers[id-1].phone;
-		$scope.remark = $scope.pers[id-1].remark;
+    //editClient
+app.controller('manager1Ctrl', function($scope,$http){
+    $http.get("../data/myJson.json").success(function(response) {$scope.infos = response.infos;});  
+    $scope.editClient = function(id){                        
+        console.log($scope.infos[id-1]);
+        $scope.company = $scope.infos[id-1].company;
+        $scope.contact = $scope.infos[id-1].contact;
+        $scope.cusPhone = $scope.infos[id-1].cusPhone;
+        $scope.department = $scope.infos[id-1].department;           
+        $scope.testAccount = $scope.infos[id-1].testAccount;
+        // $scope.products = $scope.infos[id-1].products;
+        // $scope.price = $scope.infos[id-1].price;
+        // $scope.progress = $scope.infos[id-1].progress;//进展
+        // $scope.selectSalesman = $scope.infos[id-1].manager;                
     }
-    $scope.$watch('name',function(){$scope.test();});
-    $scope.$watch('phone',function(){$scope.test();});
-    $scope.test = function(){	
-    	if (!$scope.name ||!$scope.phone ) {
-     		$scope.incomplete = true;
-  		}else{
-  			$scope.incomplete = false;
-  		}	
-    }
+
+    // $scope.$watch = ('company',function(){$scope.test();});
+    // $scope.$watch = ('contact',function(){$scope.test();});
+    // $scope.$watch = ('cusPhone',function(){$scope.test();});
+    // $scope.$watch = ('department',function(){$scope.test();});
+    // $scope.test = function(){
+    //     if (!$scope.company ||!$scope.contact ||!$scope.cusPhone ||!$scope.department) {
+    //         $scope.incomplete = true;
+    //     }else{
+    //         $scope.incomplete = false;
+    //     }
+    // }
 });
 
+//addClient 页面
+// app.controller('addClientCtrl', function($scope,$http){
+//     $http.get("../data/myJson.json").success(function(response) {$scope.infos = response.infos;});
+//     $scope.$watch = ('new_company',function(){$scope.test();});
+//     $scope.$watch = ('new_contact',function(){$scope.test();});
+//     $scope.$watch = ('new_cusPhone',function(){$scope.test();});
+//     $scope.$watch = ('new_department',function(){$scope.test();});
+    
+//     $scope.test = function(){
+//         if (!$scope.new_company ||!$scope.new_contact ||!$scope.new_cusPhone ||!$scope.new_department ) {
+//             $scope.incomplete = true;
+//         }else{
+//             $scope.incomplete = false;
+//         }
+//     }
+// })
 
-//addClient
+//addClient页面
+app.controller('optionSalesman', function($scope,$http){  
+    $http.get("../data/myJson.json").success(function(response) {
+        $scope.salesmans = response.salesmans;
+
+    });
+});
 
 app.controller('productCtrl',function($scope,$http){
     $scope.products = [{type:''}];
@@ -162,7 +172,6 @@ app.controller('productCtrl',function($scope,$http){
         $scope.products.splice(index, 1);
     };
 });
-
     //上传图片
 app.directive('fileModel', ['$parse', function ($parse) {
   return {
@@ -221,5 +230,32 @@ app.factory('fileReader', ["$q", "$log", function($q, $log){
     readAsDataUrl: readAsDataURL  
   };
 }])
-//上传图片结束
+    //上传图片结束
 
+//manager2页面
+app.controller('manager2Ctrl', function ($scope,$http) {
+    $http.get("../data/myJson.json").success(function(response) {$scope.pers = response.pers;console.log(response.pers);});
+    $scope.editMarket = function(id){
+        $scope.name = $scope.pers[id-1].name;
+        $scope.phone = $scope.pers[id-1].phone;
+        $scope.remark = $scope.pers[id-1].remark;
+    }
+    $scope.$watch('name',function(){$scope.test1();});
+    $scope.$watch('phone',function(){$scope.test1();});
+    $scope.test1 = function(){   
+        if (!$scope.name ||!$scope.phone ) {
+            $scope.incomplete = true;
+        }else{
+            $scope.incomplete = false;
+        }   
+    }
+    $scope.$watch('new_name',function(){$scope.test2();});
+    $scope.$watch('new_phone',function(){$scope.test2();});
+    $scope.test2 = function(){   
+        if (!$scope.new_name ||!$scope.new_phone ) {
+            $scope.new_incomplete = true;
+        }else{
+            $scope.new_incomplete = false;
+        }   
+    }
+});

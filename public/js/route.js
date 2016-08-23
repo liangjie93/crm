@@ -1,7 +1,7 @@
 app.controller('manager1Ctrl',function($scope){});
 app.controller('manager2Ctrl',function($scope){});
 app.controller('addClientCtrl',function($scope){});
-app.controller('editClientCtrl',function($scope){});
+// app.controller('editClientCtrl',function($scope){});
 
 
 app.config(function($routeProvider){
@@ -19,10 +19,10 @@ app.config(function($routeProvider){
         templateUrl:'addClient.html',
         controller: 'addClientCtrl'
     })
-    .when('/manager1/editClient',{
-        templateUrl:'editClient.html',
-        controller: 'editClientCtrl'
-    })
+    // .when('/manager1/editClient',{
+    //     templateUrl:'editClient.html',
+    //     controller: 'editClientCtrl'
+    // })
     .otherwise({
         redirectTo: 'manager1.html'
     });
