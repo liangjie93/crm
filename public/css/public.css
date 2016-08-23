@@ -96,8 +96,6 @@ div {
      background-color: #ff5d17;
 }
 
-
-
 /*first-left end*/
 .first-right {
     float: right;
@@ -137,4 +135,27 @@ div {
 }
 .client #del {
     color: #ff0000;
+}
+/*add*/
+.upload{
+    width: 100%;
+   /*display:inline-block; */
+   /*position:relative;*/
+    /*overflow:hidden;*/
+}
+.upload  input {
+
+   position:absolute; 
+   /*right:0; */
+   top:0; 
+   opacity:0; 
+   filter:alpha(opacity=0);
+   cursor: pointer;
+}
+.upload img {
+     max-width:300px;
+     max-height:300px;
+     margin:0 auto;
+     display:block;
+     margin-top: 5px;
 }
