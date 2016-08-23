@@ -13,7 +13,6 @@
         {"company": "浙江33","manager": "who3"},
         {"company": "浙江44","manager": "who4"}
     ],
-
     "pers":
 	[
         {"id": "1" , "name": "li", "phone": "123" ,"remark": "555"},
