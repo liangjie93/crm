@@ -1,10 +1,10 @@
 {
 	"infos":
 	[
-        {"id": "1" , "company": "浙江11", "contact" : "LLL" , "department" : "技术部" , "cusPhone" : "111" , "testAccount" : "zzz" , "products" : ["11","22","33"], "price" : "12", "progress": "...", "manager": "who1", "date": "121" },
-        {"id": "2" , "company": "浙江22", "contact" : "LLL" , "department" : "技术部" , "cusPhone" : "112" , "testAccount" : "zzz" , "products" : ["21","22"], "price" : "12", "progress": "...", "manager": "who2", "date": "121" },
-        {"id": "3" , "company": "zj33", "contact" : "LLL" , "department" : "技术部" , "cusPhone" : "111" , "testAccount" : "zzz" , "products" : ["31","32"], "price" : "12", "progress": "...", "manager": "who3", "date": "121" },
-        {"id": "4" , "company": "zj44", "contact" : "LLL" , "department" : "技术部" , "cusPhone" : "111" , "testAccount" : "zzz" , "products" : ["41"], "price" : "12", "progress": "...", "manager": "who4", "date": "121" }
+        {"id": "1" , "company": "浙江11", "contact" : "LLL" , "department" : "技术部" , "cusPhone" : "111" , "testAccount" : "zzz" , "products" : ["11","22","33"], "perPrice":["1","2","3"],"price" : "6", "progress": "...", "manager": "who1", "date": "121" },
+        {"id": "2" , "company": "浙江22", "contact" : "LLL" , "department" : "技术部" , "cusPhone" : "112" , "testAccount" : "zzz" , "products" : ["21","22"],"perPrice":["3","2"], "price" : "5", "progress": "...", "manager": "who2", "date": "121" },
+        {"id": "3" , "company": "zj33", "contact" : "LLL" , "department" : "技术部" , "cusPhone" : "111" , "testAccount" : "zzz" , "products" : ["31","32"], "perPrice":["1","2"],"price" : "3", "progress": "...", "manager": "who3", "date": "121" },
+        {"id": "4" , "company": "zj44", "contact" : "LLL" , "department" : "技术部" , "cusPhone" : "111" , "testAccount" : "zzz" , "products" : ["41","42","11"], "perPrice":["1","2","4"],"price" : "7", "progress": "...", "manager": "who4", "date": "121" }
     ],
     "tip":
     [
@@ -21,10 +21,15 @@
     ],
     "salesmans":
     [
-    	"liu","zhang","zhou","li"
+    	{"id":"1","name":"liu"},
+        {"id":"1","name":"zhang"},
+        {"id":"1","name":"zhou"},
+        {"id":"1","name":"li"}
     ],
     "purposes":
     [
-    	"专业导播台","lala","lalala"
+    	{"id":"1","name":"专业导播台"},
+        {"id":"1","name":"lala"},
+        {"id":"1","name":"lalala"}
     ]
 }

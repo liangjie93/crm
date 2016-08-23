@@ -1,24 +1,23 @@
-
 <div class='client'>
     <form class="form-horizontal">
         <div class="form-group">
             <label for="inputName1" class="col-sm-2 control-label"><span class='sign'>*</span>公司名:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="inputName1" placeholder="建议输入框（请输入公司全称）" ng-model='new_company'>
+                <input type="text" class="form-control" id="inputName1" placeholder="建议输入框（请输入公司全称）" ng-model='company'>
             </div>
         </div>
         <div class="form-group">
             <label for="inputName2" class="col-sm-2 control-label"><span class='sign'>*</span>联系人:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control contact" id="inputName2" placeholder="姓名" ng-model='new_contact'>
+                <input type="text" class="form-control contact" id="inputName2" placeholder="姓名" ng-model='contact'>
             </div>
-            <div class="col-sm-2"> <input type="text" class="form-control contact" id="inputName3" placeholder="联系电话" ng-model='new_cusPhone'></div>
-            <div class="col-sm-2"><input type="text" class="form-control contact" id="inputName4" placeholder="部门或职位" ng-model='new_department'></div>
+            <div class="col-sm-2"> <input type="text" class="form-control contact" id="inputName3" placeholder="联系电话" ng-model='cusPhone'></div>
+            <div class="col-sm-2"><input type="text" class="form-control contact" id="inputName4" placeholder="部门或职位" ng-model='department'></div>
         </div>
         <div class="form-group" ng-controller='optionSalesman'>
             <label class="col-sm-2 control-label">销售经理:</label>
             <div class="col-sm-4">
-                <select class="form-control"  ng-model='selectSalesman' ng-options='name for name in salesmans'>
+                <select class="form-control"  ng-model='selectSalesman' ng-options='x.name for x in salesmans'>
                 </select>
             </div>
         </div>
@@ -28,7 +27,7 @@
             <label class="col-sm-2 control-label">产品意向:</label>
             <div>
                 <div class="col-sm-4">
-                    <select class="form-control"  ng-model='product.type' ng-options='purpose for purpose in purposes'>
+                    <select class="form-control"  ng-model='product.type' ng-options='x.name for x in purposes'>
                         <option value="">下拉选择</option>
                     </select>
                 </div>
@@ -40,7 +39,7 @@
                 <div id='newProduct' ng-repeat="product in products" style='margin-top:5px;'>
                     <label class="col-sm-2 control-label"></label>
                     <div class="col-sm-4">
-                        <select class="form-control" ng-model='product.type' ng-options='purpose for purpose in purposes'>
+                        <select class="form-control" ng-model='product.type' ng-options='x.name for x in purposes'>
                             <option value="">下拉选择</option>
                         </select>
                     </div>
@@ -53,7 +52,6 @@
                     
             </div>
         </div>
-
 
         <div class="form-group">
             <label class="col-sm-2 control-label">测试账号:</label>

@@ -4,7 +4,7 @@
         <div class="first-left">
             <div class="form-inline">
                 <div class="form-group pull" ng-controller='optionSalesman'>
-                    <select class="form-control" ng-model='selectSalesman' ng-options='name for name in salesmans'>
+                    <select class="form-control" ng-model='selectSalesman' ng-options='x.name for x in salesmans'>
                             <option value="">请选择销售经理</option>
                         </select>
                 </div>
@@ -102,7 +102,7 @@
                         <div class="form-group" ng-controller='optionSalesman'>
                             <label class="col-sm-2 control-label">销售经理:</label>
                             <div class="col-sm-4">
-                                <select class="form-control" ng-model='selectSalesman' ng-options='name for name in salesmans'>
+                                <select class="form-control" ng-model='selectSalesman' ng-options='x.name for x in salesmans'>
                                 </select>
                             </div>
                         </div>
@@ -110,24 +110,24 @@
                             <label class="col-sm-2 control-label">产品意向:</label>
                             <div>
                                 <div class="col-sm-4">
-                                    <select class="form-control"  ng-model='product.type' ng-options='purpose for purpose in purposes'>
+                                    <select class="form-control"  ng-model='product.type' ng-options='x.name for x in purposes'>
                                         <option value="">下拉选择</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control"  placeholder="价格" ng-model="product.value">
+                                    <input type="text" class="form-control"  placeholder="价格" ng-model="product.value" ng-model='perPrice[0]'>
                                 </div>
                                 <div class="glyphicon glyphicon-plus" id='plus' aria-hidden="true" ng-click="addProduct()"></div>
 
                                 <div id='newProduct' ng-repeat="product in products" style='margin-top:5px;'>
                                     <label class="col-sm-2 control-label"></label>
                                     <div class="col-sm-4">
-                                        <select class="form-control" ng-model='product.type' ng-options='purpose for purpose in purposes'>
+                                        <select class="form-control" ng-model='product.type' ng-options='x.name for x in purposes'>
                                             <option value="">下拉选择</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" placeholder="请输入报价">
+                                        <input type="text" class="form-control" placeholder="价格">
                                     </div>
                                     <div class="glyphicon glyphicon-remove" id='del' aria-hidden="true" ng-click="removeProduct(product)">
                                     </div>

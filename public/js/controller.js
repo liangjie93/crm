@@ -1,10 +1,7 @@
 //manager1页面
-
 app.controller('infoCtrl', function ($scope,$http) {
     $http.get("../data/myJson.json").success(function(response) {$scope.infos = response.infos;});
-
 });
-
 app.controller('searchCtrl',function($scope,$http){
     $http.get("../data/myJson.json").success(function(response) {      
         var tip = response.tip; 
@@ -106,7 +103,6 @@ app.controller('searchCtrl',function($scope,$http){
         }
     });
 });
-
     //editClient
 app.controller('manager1Ctrl', function($scope,$http){
     $http.get("../data/myJson.json").success(function(response) {$scope.infos = response.infos;});  
@@ -118,24 +114,11 @@ app.controller('manager1Ctrl', function($scope,$http){
         $scope.department = $scope.infos[id-1].department;           
         $scope.testAccount = $scope.infos[id-1].testAccount;
         // $scope.products = $scope.infos[id-1].products;
-        // $scope.price = $scope.infos[id-1].price;
+         $scope.prePrice = $scope.infos[id-1].prePrice;
         // $scope.progress = $scope.infos[id-1].progress;//进展
         // $scope.selectSalesman = $scope.infos[id-1].manager;                
     }
-
-    // $scope.$watch = ('company',function(){$scope.test();});
-    // $scope.$watch = ('contact',function(){$scope.test();});
-    // $scope.$watch = ('cusPhone',function(){$scope.test();});
-    // $scope.$watch = ('department',function(){$scope.test();});
-    // $scope.test = function(){
-    //     if (!$scope.company ||!$scope.contact ||!$scope.cusPhone ||!$scope.department) {
-    //         $scope.incomplete = true;
-    //     }else{
-    //         $scope.incomplete = false;
-    //     }
-    // }
 });
-
 //addClient 页面
 // app.controller('addClientCtrl', function($scope,$http){
 //     $http.get("../data/myJson.json").success(function(response) {$scope.infos = response.infos;});
@@ -152,15 +135,13 @@ app.controller('manager1Ctrl', function($scope,$http){
 //         }
 //     }
 // })
-
-//addClient页面
-app.controller('optionSalesman', function($scope,$http){  
+//addClient页面 
+app.controller('optionSalesman', function($scope,$http){  //manager
     $http.get("../data/myJson.json").success(function(response) {
         $scope.salesmans = response.salesmans;
 
     });
 });
-
 app.controller('productCtrl',function($scope,$http){
     $scope.products = [{type:''}];
     $http.get("../data/myJson.json").success(function(response) {$scope.purposes = response.purposes;});
@@ -190,7 +171,6 @@ app.directive('fileModel', ['$parse', function ($parse) {
     }
   };
 }]);
-
 app.controller('UploaderController', function($scope, fileReader){
     $scope.getFile = function () {
         fileReader.readAsDataUrl($scope.file, $scope)
