@@ -1,14 +1,15 @@
 app.controller('manager1Ctrl', function($scope,$http){
+
     //销售经理
     $http.get("../data/myJson.json").success(function(response) {
         $scope.salesmans = response.salesmans;
 
     });
-    //获取数据
+    //获取客户信息
     $http.get("../data/myJson.json").success(function(response) {
         $scope.infos = response.infos;
 
-    //输入框    
+    //输入提示框    
         var tip = response.tip; 
         $scope.tip = tip;
         var tipArr = [];
@@ -107,6 +108,10 @@ app.controller('manager1Ctrl', function($scope,$http){
 
         }
     });  
+
+    //生成报表
+    $scope.export =
+
     //编辑客户
     $scope.editClient = function(id){                        
         console.log($scope.infos[id-1]);
@@ -120,6 +125,7 @@ app.controller('manager1Ctrl', function($scope,$http){
         // $scope.progress = $scope.infos[id-1].progress;//进展
         // $scope.selectSalesman = $scope.infos[id-1].manager;                
     }
+    
     //产品意向
     $scope.products = [{type:''}];
     $http.get("../data/myJson.json").success(function(response) {$scope.purposes = response.purposes;});

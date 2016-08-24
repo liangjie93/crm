@@ -1,5 +1,11 @@
 app.controller('manager2Ctrl', function ($scope,$http) {
-    $http.get("../data/myJson.json").success(function(response) {$scope.pers = response.pers;console.log(response.pers);});
+    //销售人员
+    $http.get("../data/myJson.json").success(function(response) {
+        $scope.pers = response.pers;
+        console.log(response.pers);
+    });
+    
+    //编辑
     $scope.editMarket = function(id){
         $scope.name = $scope.pers[id-1].name;
         $scope.phone = $scope.pers[id-1].phone;
