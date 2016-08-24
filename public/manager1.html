@@ -3,7 +3,7 @@
     <div class="first-section">
         <div class="first-left">
             <div class="form-inline">
-                <div class="form-group pull" ng-controller='optionSalesman'>
+                <div class="form-group pull">
                     <select class="form-control" ng-model='selectSalesman' ng-options='x.name for x in salesmans'>
                             <option value="">请选择销售经理</option>
                         </select>
@@ -17,7 +17,7 @@
                         </select>
                 </div>
                 <div class="search form-group">
-                    <div class="input-group" ng-controller='searchCtrl'>
+                    <div class="input-group">
                         <input type="text" class="form-control" id="search_text" placeholder="输入关键字">
                          
                         <div id="auto_div"><!-- 自动补全提示框 --></div>
@@ -37,7 +37,7 @@
     <!--first-section end -->
     <!--second-section 表格-->
     <div class="second-section">
-        <table class="table" ng-controller='infoCtrl'>
+        <table class="table">
             <tr class='title'>
                 <th>公司名</th>
                 <th>联系人/部门</th>
@@ -99,14 +99,14 @@
                             <div class="col-sm-2"> <input type="text" class="form-control contact" id="inputName3" placeholder="联系电话" ng-model='cusPhone'></div>
                             <div class="col-sm-2"><input type="text" class="form-control contact" id="inputName4" placeholder="部门或职位" ng-model='department'></div>
                         </div>
-                        <div class="form-group" ng-controller='optionSalesman'>
+                        <div class="form-group">
                             <label class="col-sm-2 control-label">销售经理:</label>
                             <div class="col-sm-4">
                                 <select class="form-control" ng-model='selectSalesman' ng-options='x.name for x in salesmans'>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group"  ng-controller='productCtrl'>
+                        <div class="form-group">
                             <label class="col-sm-2 control-label">产品意向:</label>
                             <div>
                                 <div class="col-sm-4">

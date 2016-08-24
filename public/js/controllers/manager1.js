@@ -1,9 +1,14 @@
-//manager1页面
-app.controller('infoCtrl', function ($scope,$http) {
-    $http.get("../data/myJson.json").success(function(response) {$scope.infos = response.infos;});
-});
-app.controller('searchCtrl',function($scope,$http){
-    $http.get("../data/myJson.json").success(function(response) {      
+app.controller('manager1Ctrl', function($scope,$http){
+    //销售经理
+    $http.get("../data/myJson.json").success(function(response) {
+        $scope.salesmans = response.salesmans;
+
+    });
+    //获取数据
+    $http.get("../data/myJson.json").success(function(response) {
+        $scope.infos = response.infos;
+
+    //输入框    
         var tip = response.tip; 
         $scope.tip = tip;
         var tipArr = [];
@@ -101,11 +106,8 @@ app.controller('searchCtrl',function($scope,$http){
             });
 
         }
-    });
-});
-    //editClient
-app.controller('manager1Ctrl', function($scope,$http){
-    $http.get("../data/myJson.json").success(function(response) {$scope.infos = response.infos;});  
+    });  
+    //编辑客户
     $scope.editClient = function(id){                        
         console.log($scope.infos[id-1]);
         $scope.company = $scope.infos[id-1].company;
@@ -118,31 +120,7 @@ app.controller('manager1Ctrl', function($scope,$http){
         // $scope.progress = $scope.infos[id-1].progress;//进展
         // $scope.selectSalesman = $scope.infos[id-1].manager;                
     }
-});
-//addClient 页面
-// app.controller('addClientCtrl', function($scope,$http){
-//     $http.get("../data/myJson.json").success(function(response) {$scope.infos = response.infos;});
-//     $scope.$watch = ('new_company',function(){$scope.test();});
-//     $scope.$watch = ('new_contact',function(){$scope.test();});
-//     $scope.$watch = ('new_cusPhone',function(){$scope.test();});
-//     $scope.$watch = ('new_department',function(){$scope.test();});
-    
-//     $scope.test = function(){
-//         if (!$scope.new_company ||!$scope.new_contact ||!$scope.new_cusPhone ||!$scope.new_department ) {
-//             $scope.incomplete = true;
-//         }else{
-//             $scope.incomplete = false;
-//         }
-//     }
-// })
-//addClient页面 
-app.controller('optionSalesman', function($scope,$http){  //manager
-    $http.get("../data/myJson.json").success(function(response) {
-        $scope.salesmans = response.salesmans;
-
-    });
-});
-app.controller('productCtrl',function($scope,$http){
+    //产品意向
     $scope.products = [{type:''}];
     $http.get("../data/myJson.json").success(function(response) {$scope.purposes = response.purposes;});
     $scope.addProduct = function() {
@@ -152,90 +130,4 @@ app.controller('productCtrl',function($scope,$http){
         var index = $scope.products.indexOf(contactToRemove);
         $scope.products.splice(index, 1);
     };
-});
-    //上传图片
-app.directive('fileModel', ['$parse', function ($parse) {
-  return {
-    restrict: 'A',
-    link: function(scope, element, attrs, ngModel) {
-      var model = $parse(attrs.fileModel);
-      var modelSetter = model.assign;
-      element.bind('change', function(event){
-        scope.$apply(function(){
-          modelSetter(scope, element[0].files[0]);
-        });
-        //附件预览
-       scope.file = (event.srcElement || event.target).files[0];
-        scope.getFile();
-      });
-    }
-  };
-}]);
-app.controller('UploaderController', function($scope, fileReader){
-    $scope.getFile = function () {
-        fileReader.readAsDataUrl($scope.file, $scope)
-        .then(function(result) {
-            $scope.imageSrc = result;
-        });
-    };
-})
-app.factory('fileReader', ["$q", "$log", function($q, $log){
-  var onLoad = function(reader, deferred, scope) {
-    return function () {
-      scope.$apply(function () {
-        deferred.resolve(reader.result);
-      });
-    };
-  };
-  var onError = function (reader, deferred, scope) {
-    return function () {
-      scope.$apply(function () {
-        deferred.reject(reader.result);
-      });
-    };
-  };
-  var getReader = function(deferred, scope) {
-    var reader = new FileReader();
-    reader.onload = onLoad(reader, deferred, scope);
-    reader.onerror = onError(reader, deferred, scope);
-    return reader;
-  };
-  var readAsDataURL = function (file, scope) {
-    var deferred = $q.defer();
-    var reader = getReader(deferred, scope);         
-    reader.readAsDataURL(file);
-    return deferred.promise;
-  };
-  return {
-    readAsDataUrl: readAsDataURL  
-  };
-}])
-    //上传图片结束
-
-//manager2页面
-app.controller('manager2Ctrl', function ($scope,$http) {
-    $http.get("../data/myJson.json").success(function(response) {$scope.pers = response.pers;console.log(response.pers);});
-    $scope.editMarket = function(id){
-        $scope.name = $scope.pers[id-1].name;
-        $scope.phone = $scope.pers[id-1].phone;
-        $scope.remark = $scope.pers[id-1].remark;
-    }
-    $scope.$watch('name',function(){$scope.test1();});
-    $scope.$watch('phone',function(){$scope.test1();});
-    $scope.test1 = function(){   
-        if (!$scope.name ||!$scope.phone ) {
-            $scope.incomplete = true;
-        }else{
-            $scope.incomplete = false;
-        }   
-    }
-    $scope.$watch('new_name',function(){$scope.test2();});
-    $scope.$watch('new_phone',function(){$scope.test2();});
-    $scope.test2 = function(){   
-        if (!$scope.new_name ||!$scope.new_phone ) {
-            $scope.new_incomplete = true;
-        }else{
-            $scope.new_incomplete = false;
-        }   
-    }
 });
