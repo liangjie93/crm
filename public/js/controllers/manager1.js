@@ -1,10 +1,11 @@
 app.controller('manager1Ctrl', function($scope,$http){
 
     //销售经理
-    $http.get("../data/myJson.json").success(function(response) {
-        $scope.salesmans = response.salesmans;
-
+    $http.post("/crm/user/lists",{"start_page": 0,"page_size": 0})
+    .success(function(response) {
+        $scope.salesmans = response.data.list;
     });
+    
     //获取客户信息
     $http.post("/crm/client/search",{"start_page": 0,"page_size": 0,"select_type": "string","seller_id": 0})
     .success(function(response) {
@@ -115,17 +116,17 @@ app.controller('manager1Ctrl', function($scope,$http){
     // $scope.export =
 
     //编辑客户
-    $scope.editClient = function(id){                        
-        console.log($scope.infos[id-1]);
-        $scope.company = $scope.infos[id-1].company;
-        $scope.contact = $scope.infos[id-1].contact;
-        $scope.cusPhone = $scope.infos[id-1].cusPhone;
-        $scope.department = $scope.infos[id-1].department;           
-        $scope.testAccount = $scope.infos[id-1].testAccount;
-        // $scope.products = $scope.infos[id-1].products;
-         $scope.prePrice = $scope.infos[id-1].prePrice;
-        // $scope.progress = $scope.infos[id-1].progress;//进展
-        // $scope.selectSalesman = $scope.infos[id-1].manager;                
+    $scope.editClient = function($index){                        
+        console.log($scope.clients[$index]);
+        $scope.company = $scope.clients[$index].company;
+        $scope.contractName = $scope.clients[$index].contractName;
+        $scope.contractPhone = $scope.clients[$index].contractPhone;
+        $scope.deptName = $scope.clients[$index].deptName;           
+        $scope.testAccount = $scope.clients[$index].testAccount;
+        // $scope.products = $scope.clients[$index].products;
+        // $scope.prePrice = $scope.clients[$index].prePrice;
+        // $scope.progress = $scope.clients[$index].progress;//进展
+        // $scope.selectSalesman = $scope.clients[$index].manager;                
     }
     
     //产品意向

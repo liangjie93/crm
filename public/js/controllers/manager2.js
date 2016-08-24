@@ -2,16 +2,17 @@ app.controller('manager2Ctrl', function ($scope,$http) {
     //销售人员显示
     $http.post("/crm/user/info/lists",{"start_page": 0,"page_size": 0})
     .success(function(response) {
-        $scope.lists = response.data.list;
+        $scope.salesmans = response.data.list;
     });
     
 
     
     //编辑
-    $scope.editMarket = function(id){
-        $scope.name = $scope.lists[id-1].name;
-        $scope.phone = $scope.lists[id-1].phone;
-        $scope.remark = $scope.lists[id-1].remark;
+    $scope.editMarket = function($index){
+        console.log($scope.salesmans[$index])
+        $scope.name = $scope.salesmans[$index].name;
+        $scope.phone = $scope.salesmans[$index].phone;
+        $scope.remark = $scope.salesmans[$index].remark;
     }
     $scope.$watch('name',function(){$scope.test1();});
     $scope.$watch('phone',function(){$scope.test1();});
