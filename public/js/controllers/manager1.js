@@ -8,19 +8,18 @@ app.controller('manager1Ctrl', function($scope,$http){
     //获取客户信息
     $http.post("/crm/client/search",{"start_page": 0,"page_size": 0,"select_type": "string","seller_id": 0})
     .success(function(response) {
-        $scope.infos = response.data.list;
+        $scope.clients = response.data.list;
         console.log(response.data.list)
 
     //输入提示框    
-        var tip = response.tip; 
-        console.log(tip)
+        var tip = response.data.list; 
         $scope.tip = tip;
         var tipArr = [];
-
         for(var i in tip){
-            tipArr.push(tip[i].company + '-' + tip[i].manager);
+            tipArr.push(tip[i].company + '-' + tip[i].sellName);
 
             var list = tipArr;
+            console.log(list);
             //测试用的数据
             // var list = ["浙江-who0", "上海-111", "浙江-122", "浙江-123", "上海-211", "上海-222", "浙江-223", "浙江-311", "北京-322", "浙江-333", "浙江-411", "北京-422", "北京-433", "浙江-511", "浙江-522",'浙江-533'];
             var old_value = "";
@@ -113,7 +112,7 @@ app.controller('manager1Ctrl', function($scope,$http){
     });  
 
     //生成报表
-    $scope.export =
+    // $scope.export =
 
     //编辑客户
     $scope.editClient = function(id){                        
