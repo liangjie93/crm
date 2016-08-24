@@ -17,14 +17,15 @@
                 <th>数据</th>
                 <th>操作</th>
             </tr>
-            <tr ng-repeat='x in salesmans'>
-                <td>{{x.name}}</td>
-                <td>{{x.phone}}</td>
-                <td>{{x.remark}}</td>
-                <td>{{x.dealNum}}</td>
+            <tr ng-repeat='saleman in salesmans'>
+                <td>{{saleman.name}}</td>
+                <td>{{saleman.phone}}</td>
+                <td>{{saleman.remark}}</td>
+                <td>{{saleman.dealNum}}</td>
                 <td>
                     <button type="button" class="btn btn-info btn-primary" data-toggle="modal" data-target="#editMarket" ng-click='editMarket($index)'>编辑</button>
-                    <button type="button" class="btn btn-danger">删除</button>
+                    <button type="button" class="btn btn-danger btn-lg" data-toggle="popover" data-content="<button></button>"  >删除</button><!-- ng-click='delMarket($index)' -->
+                    <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."> Popover on 顶部</button>
                 </td>
             </tr>
         </table>
