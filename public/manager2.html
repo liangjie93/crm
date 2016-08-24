@@ -9,7 +9,7 @@
     <!--first-section end -->
     <!--second-section-->
     <div class="second-section">
-        <table class="table" ng-app='perApp'>
+        <table class="table" ng-app='listApp'>
             <tr class='title'>
                 <th>姓名</th>
                 <th>联系电话</th>
@@ -17,13 +17,13 @@
                 <th>数据</th>
                 <th>操作</th>
             </tr>
-            <tr ng-repeat='per in pers'>
-                <td>{{per.name}}</td>
-                <td>{{per.phone}}</td>
-                <td>{{per.remark}}</td>
-                <td>..</td>
+            <tr ng-repeat='list in lists'>
+                <td>{{list.name}}</td>
+                <td>{{list.phone}}</td>
+                <td>{{list.remark}}</td>
+                <td>{{list.dealNum}}</td>
                 <td>
-                    <button type="button" class="btn btn-info btn-primary" data-toggle="modal" data-target="#editMarket" ng-click='editMarket(per.id)'>编辑</button>
+                    <button type="button" class="btn btn-info btn-primary" data-toggle="modal" data-target="#editMarket" ng-click='editMarket(list.id)'>编辑</button>
                     <button type="button" class="btn btn-danger">删除</button>
                 </td>
             </tr>

@@ -6,11 +6,14 @@ app.controller('manager1Ctrl', function($scope,$http){
 
     });
     //获取客户信息
-    $http.get("../data/myJson.json").success(function(response) {
-        $scope.infos = response.infos;
+    $http.post("/crm/client/search",{"start_page": 0,"page_size": 0,"select_type": "string","seller_id": 0})
+    .success(function(response) {
+        $scope.infos = response.data.list;
+        console.log(response.data.list)
 
     //输入提示框    
         var tip = response.tip; 
+        console.log(tip)
         $scope.tip = tip;
         var tipArr = [];
 
