@@ -1,12 +1,12 @@
 app.controller('addClientCtrl',function($scope,$http){
    
-   //销售经理
-   $http.get("../data/myJson.json").success(function(response) {
+//销售经理
+    $http.get("../data/myJson.json").success(function(response) {
         $scope.salesmans = response.salesmans;
 
     });
-   //产品意向
-   $scope.products = [{type:''}];
+//产品意向
+    $scope.products = [{type:''}];
     $http.get("../data/myJson.json").success(function(response) {$scope.purposes = response.purposes;});
     $scope.addProduct = function() {
         $scope.products.push({type:''});
@@ -15,7 +15,10 @@ app.controller('addClientCtrl',function($scope,$http){
         var index = $scope.products.indexOf(contactToRemove);
         $scope.products.splice(index, 1);
     };
-
+//保存
+    $scope.saveClient = function(){
+      $http.post()
+    }
 
 //     
 //     $scope.$watch = ('new_company',function(){$scope.test();});
