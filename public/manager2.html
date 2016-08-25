@@ -24,16 +24,22 @@
                 <td>{{saleman.dealNum}}</td>
                 <td>
                     <button type="button" class="btn btn-info btn-primary" data-toggle="modal" data-target="#editMarket" ng-click='editMarket($index)'>编辑</button>
-                    <button type="button" class="btn btn-danger btn-lg" data-toggle="popover" data-content="<button></button>"  >删除</button><!-- ng-click='delMarket($index)' -->
-                    <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."> Popover on 顶部</button>
-                </td>
+                    <button type="button" class="btn btn-danger btn-primary" data-toggle="modal" ng-click='wantDel($index)'>删除</button><!-- ng-click='delMarket($index)' -->
+                    <!-- <div class='btns' > -->
+
+                    <button type="button" ng-show='conDel' class="btn btn-primary btn-warning" ng-click='delMarket($index)'>确认删除</button>
+                        <!-- <button type="button" class="btn btn-default cancel" data-dismiss="modal">取消</button> -->
+                    <!-- </div> -->
+                </td>        
             </tr>
         </table>
-
-
-
     </div>
 
+    <!-- third-section -->
+    <div class="third-section">
+       <uib-pagination total-items="page.totalCount" ng-model="page.pageNo" max-size="3"  ng-change="pageChanged()" class="samplePage pagination-sm" boundary-link-numbers="true">
+       </uib-pagination> 
+    </div>  
 
 
     <!-- 添加销售经理 Modal -->
@@ -62,7 +68,21 @@
                                 <span class='sign'>*</span>联系电话
                             </label>
                             <div class="col-sm-5">
-                                <input type="text" class="form-control" id="inputName2"  ng-model='new_phone'>
+                                <input type="text" class="form-control" id="inputName2" ng-model='new_phone' ng-minlength="11">
+                                <span>请输入11位手机号码</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><span class='sign'>*</span>账号</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" ng-model='new_account'>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><span class='sign'>*</span>密码</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" ng-model='new_password' ng-minlength="6">
+                                <span>密码不小于6位</span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -72,7 +92,7 @@
                             </div>
                         </div>
                         <div class="modal-footer ">
-                            <button type="button" class="btn btn-warning" ng-disabled="new_incomplete">保存</button>
+                            <button type="button" class="btn btn-warning" ng-disabled="new_incomplete" ng-click='saveUser()'>保存</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                         </div>
                     </form>
@@ -109,6 +129,12 @@
                             </label>
                             <div class="col-sm-5">
                                 <input type="text" class="form-control" id="inputName2" ng-model='phone'>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><span class='sign'>*</span>密码</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" ng-model='set_password'>
                             </div>
                         </div>
                         <div class="form-group">

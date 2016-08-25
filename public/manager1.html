@@ -73,6 +73,12 @@
     </div>
     <!--second-section end-->
 
+    <!-- third-section -->
+    <div class="third-section">
+       <uib-pagination total-items="page.totalCount" ng-model="page.pageNo" max-size="5"  ng-change="pageChanged()" class="samplePage pagination-sm" boundary-link-numbers="true">
+       </uib-pagination> 
+    </div>  
+    
      <!-- 编辑客户经理 Modal -->
     <div class="modal fade myModal client" id="editClient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog" role="document">

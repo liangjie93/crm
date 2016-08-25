@@ -113,7 +113,14 @@ app.controller('manager1Ctrl', function($scope,$http){
     });  
 
     //生成报表
-    // $scope.export =
+    $scope.export = function(){
+        $http.post("/crm/client/export")
+        .success(function(result){
+            if(result.code == 0){
+                return
+            }
+        })
+    }
 
     //编辑客户
     $scope.editClient = function($index){                        
@@ -129,7 +136,7 @@ app.controller('manager1Ctrl', function($scope,$http){
         // $scope.selectSalesman = $scope.clients[$index].manager;                
     }
     
-    //产品意向
+    //产品意向 增加删除
     $scope.products = [{type:''}];
     $http.get("../data/myJson.json").success(function(response) {$scope.purposes = response.purposes;});
     $scope.addProduct = function() {
@@ -139,4 +146,10 @@ app.controller('manager1Ctrl', function($scope,$http){
         var index = $scope.products.indexOf(contactToRemove);
         $scope.products.splice(index, 1);
     };
+
+//分页
+    $scope.page = {
+        "pageSize":10,"pageNo":1,"totalCount":99};
+        $scope.pageChanged = function(){
+    }    
 });

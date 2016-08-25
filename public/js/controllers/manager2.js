@@ -8,13 +8,28 @@ app.controller('manager2Ctrl', function ($scope,$http) {
 //添加
     $scope.$watch('new_name',function(){$scope.test2();});
     $scope.$watch('new_phone',function(){$scope.test2();});
+    $scope.$watch('new_account',function(){$scope.test2();});
+    $scope.$watch('new_password',function(){$scope.test2();});
     $scope.test2 = function(){   
-        if (!$scope.new_name ||!$scope.new_phone ) {
+        if (!$scope.new_name ||!$scope.new_phone ||!$scope.new_account ||!$scope.new_password ) {
             $scope.new_incomplete = true;
         }else{
             $scope.new_incomplete = false;
         }   
     }  
+//保存
+    $scope.saveUser = function(){
+        console.log(111);
+        $http.post('/crm/user/add',{"name": $scope.new_name,"remark": $scope.remark,"phone": $scope.new_phone,"pwd": $scope.new_password,"account": $scope.new_account})
+        .success(function(data){
+            console.log(data);
+            if(data.code == 0){
+                console.log($scope.new_name);
+
+            }
+        })
+    }
+   
 //编辑
     $scope.editMarket = function($index){
         console.log($scope.salesmans[$index]);
@@ -32,10 +47,8 @@ app.controller('manager2Ctrl', function ($scope,$http) {
         }   
     }
 //删除
-    // $scope.confirmDle = function(){
-    //     alert()
-    // }
     $scope.delMarket = function($index){
+        console.log($scope.salesmans[$index]);
         console.log($index);
         console.log($scope.salesmans[$index].id);
         $http.post("/crm/user/delete/"+$scope.salesmans[$index].id)
@@ -48,6 +61,17 @@ app.controller('manager2Ctrl', function ($scope,$http) {
             }
         })
     }
+    $scope.conDel = false;
+    $scope.wantDel = function($index){
+        console.log($index)
+        $scope.conDel = !$scope.conDel;
+    }
 
-
+//分页
+    $scope.page = {
+        "pageSize":10,"pageNo":1,"totalCount":99
+    };
+    $scope.pageChanged = function(){
+        
+    }
 });

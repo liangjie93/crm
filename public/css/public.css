@@ -114,6 +114,12 @@ div {
     vertical-align:middle;
 }
 
+.third-section {
+    position:relative;
+    bottom: 5px;
+    right: -50%;
+}
+
 /*addClient*/
 .client {
     margin: 50px 0 0 20px;
