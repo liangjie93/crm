@@ -4,6 +4,7 @@ app.controller('manager2Ctrl', function ($scope,$http) {
     $http.post("/crm/user/info/lists",{"start_page": 0,"page_size": 0})
     .success(function(response) {
         $scope.salesmans = response.data.list;
+        console.log(response.data.list)
     });
 //添加
     $scope.$watch('new_name',function(){$scope.test2();});
@@ -17,18 +18,27 @@ app.controller('manager2Ctrl', function ($scope,$http) {
             $scope.new_incomplete = false;
         }   
     }  
+    // $scope.submitForm = function(isValid) {
+    //         if (!isValid) {
+    //             alert('验证失败');
+    //         }
+    //     };
 //保存
     $scope.saveUser = function(){
-        console.log(111);
         $http.post('/crm/user/add',{"name": $scope.new_name,"remark": $scope.remark,"phone": $scope.new_phone,"pwd": $scope.new_password,"account": $scope.new_account})
         .success(function(data){
             console.log(data);
             if(data.code == 0){
                 console.log($scope.new_name);
+                // for(i in )
+                if(data.co){
+
+                }
 
             }
         })
     }
+
    
 //编辑
     $scope.editMarket = function($index){
@@ -46,32 +56,37 @@ app.controller('manager2Ctrl', function ($scope,$http) {
             $scope.incomplete = false;
         }   
     }
+//确认删除？    
+    $scope.conDel = false;
+    $scope.wantDel = function($index){
+        // console.log($index);
+        $scope.conDel = true;
+    }
+    $scope.cancelDel = function(){
+        $scope.conDel = false;
+    }    
 //删除
     $scope.delMarket = function($index){
         console.log($scope.salesmans[$index]);
         console.log($index);
         console.log($scope.salesmans[$index].id);
-        $http.post("/crm/user/delete/"+$scope.salesmans[$index].id)
-        .success(function(result){
-            if(result.code == 0){
-                 $scope.salesmans.splice($index,1);
+        // $http.post("/crm/user/delete/"+$scope.salesmans[$index].id)
+        // .success(function(result){
+            // if(result.code == 0){
+            //      $scope.salesmans.splice($index,1);
 
-            }else{
-                alert(msg)
-            }
-        })
+            // }else{
+            //     alert(msg)
+            // }
+        // })
     }
-    $scope.conDel = false;
-    $scope.wantDel = function($index){
-        console.log($index)
-        $scope.conDel = !$scope.conDel;
-    }
+
 
 //分页
     $scope.page = {
         "pageSize":10,"pageNo":1,"totalCount":99
     };
     $scope.pageChanged = function(){
-        
+
     }
 });
