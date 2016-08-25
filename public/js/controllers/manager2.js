@@ -30,12 +30,12 @@ app.controller('manager2Ctrl', function ($scope,$http) {
             console.log(data);
             if(data.code == 0){
                 console.log($scope.new_name);
-                // for(i in )
-                if(data.co){
-
-                }
-
+            }else if(data.code == 10010){
+                alert("此账号已存在")
+            }else if(data.code ==10027){
+                alert("用户没有登陆账号")
             }
+            
         })
     }
 
