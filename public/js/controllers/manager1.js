@@ -4,6 +4,7 @@ app.controller('manager1Ctrl', function($scope,$http){
     $http.post("/crm/user/lists",{"start_page": 0,"page_size": 0})
     .success(function(response) {
         $scope.salesmans = response.data.list;
+        console.log(response.data.list)
     });
     
     //获取客户信息
