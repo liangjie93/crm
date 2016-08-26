@@ -9,8 +9,8 @@ app.controller('addClientCtrl',function($scope,$http){
 //产品
     $http.post("/crm/product/lists",{})
     .success(function(response){
-        // console.log(response.data)
-        // $scope.purposes = response.data;
+        console.log(response.data)
+        $scope.purposes = response.data;
     })    
 //产品意向
     $scope.products = [{type:''}];
