@@ -4,9 +4,17 @@ app.controller('manager1Ctrl', function($scope,$http,$filter){
     $http.post("/crm/user/lists",{"start_page": 0,"page_size": 0})
     .success(function(response) {
         $scope.salesmans = response.data.list;
-        // console.log(response.data.list)
+        console.log(response.data.list)
     });
-    
+//类别
+    $scope.type = ["A类","B类",'C类','D类']
+    $http.post("/crm/client/search",
+        {
+          "start_page": 0,
+          "page_size": 0,
+          "select_type": $scope.x,
+          "seller_id": 0
+        })    
 //获取客户信息
     $http.post("/crm/client/search",{"start_page": 0,"page_size": 0,"select_type": "string","seller_id": 0})
     .success(function(response) {
@@ -124,15 +132,23 @@ app.controller('manager1Ctrl', function($scope,$http,$filter){
 
 //生成报表
     $scope.export = function(){
-        $http.post("/crm/client/export",{})
-        .success(function(result){
-            console.log(result);
-            if(result.code == 0){
-                
-            }
-        })
+        var form = $("<form>");   //定义一个form表单
+        form.attr('style','display:none');   //在form表单中添加查询参数
+        form.attr('target','');
+        form.attr('method','post');
+        form.attr('action',"/crm/client/export");
+        var input1 = $('<input>'); 
+        input1.attr('type','hidden'); 
+        input1.attr('name','exportPostTime'); 
+        input1.attr('value','timeString'); 
+        $('body').append(form);  //将表单放置在web中
+        form.append(input1);   //将查询参数控件提交到表单上
+        form.submit();   //表单提交
     }
 
+    $scope.abbb = function(a,b){
+        return a == b;
+    }
 //编辑客户
     $scope.editClient = function($index){                        
         console.log($scope.clients[$index]);//当前用户信息
@@ -146,27 +162,34 @@ app.controller('manager1Ctrl', function($scope,$http,$filter){
         $scope.products = $scope.clients[$index].products;//产品 价格
         $scope.remark =  $scope.clients[$index].remark;
         $scope.price = $scope.clients[$index].price;//总价
-        console.log($scope.products)
+
+        console.log("$scope.products");
+        console.log($scope.products);
+        console.log($scope.purposes);
+        console.log("$scope.purposes");
         console.log($scope.price);
 
+        $scope.productList = [];
+
         for(var i in $scope.products){
-            $scope.productList = $scope.products[i].name;
+            $scope.productList.push($scope.products[i].name);
             $scope.priceList = $scope.products[i].price;
             $scope.idList = $scope.products[i].id;
 
             console.log($scope.products[i])
         //保存  更新客户信息
             $scope.saveEditClient = function(){
-                console.log($scope.remark);
-                console.log($scope.priceList);
-                console.log($scope.idList);
-                console.log($scope.productList)
-                console.log($scope.sellName)
+                // console.log($scope.remark);
+                console.log($scope.products);
+                // console.log($scope.priceList);
+                // console.log($scope.idList);
+                console.log($scope.productList);
+                // console.log($scope.sellName);
                 $http.post("/crm/client/modify",{
                   "id": $scope.id,
                   "company": $scope.company,
-                  "contractname": $scope.contractName,
-                  "contractphone": $scope.contractPhone,
+                  "contractName": $scope.contractName,
+                  "contractPhone": $scope.contractPhone,
                   "deptname":  $scope.deptName,
                   "products": [
                     {
@@ -174,16 +197,14 @@ app.controller('manager1Ctrl', function($scope,$http,$filter){
                       "price": $scope.priceList
                     }
                   ],
-                  "testaccount": $scope.testAccount,
+                  "testAccount": $scope.testAccount,
                   "remark": $scope.remark,
-                  "businesslicense": "url",
+                  "businessLicense": "url",
                   "price": $scope.price
                 }).success(function(data){
                     console.log(data)
                     if (data.code == 0) {
                         
-                    }else if(data.code == 0){
-                        alert()
                     }
                 }) 
             }
@@ -201,7 +222,7 @@ app.controller('manager1Ctrl', function($scope,$http,$filter){
 //产品意向 增加删除
     $scope.products = [{type:''}];
     $scope.addProduct = function() {
-        $scope.products.push({type:''});
+        $scope.products.push({type:'',price:''});
     };
     $scope.removeProduct = function(contactToRemove) {
         var index = $scope.products.indexOf(contactToRemove);

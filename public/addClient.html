@@ -30,7 +30,6 @@
             </div>
         </div>
 
-
         <div class="form-group">
             <label class="col-sm-2 control-label">产品意向:</label>
             <div>
@@ -40,7 +39,7 @@
                     </select>
                 </div>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control"  placeholder="价格" ng-model="product.value">
+                    <input type="text" class="form-control"  placeholder="价格" ng-model="product.price">
                 </div>
                 <div class="glyphicon glyphicon-plus" id='plus' aria-hidden="true" ng-click="addProduct()"></div>
                 <div id='newProduct' ng-repeat="product in products" style='margin-top:5px;'>
@@ -55,8 +54,7 @@
                     </div>
                     <div class="glyphicon glyphicon-remove" id='del' aria-hidden="true" ng-click="removeProduct(product)">
                     </div>
-                </div>
-                    
+                </div>                    
             </div>
         </div>
 

@@ -10,10 +10,8 @@
                 </div>
                 <div class="form-group pull">
                     <select class="form-control">
-                            <option value="1">A类</option>
-                            <option value="2">B类</option>
-                            <option value="3">C类</option>
-                            <option value="3">D类</option>
+                            <option ng-repeat='x in type' value="{{x}}">{{x}}</option>
+                           
                         </select>
                 </div>
                 <div class="search form-group">
@@ -145,12 +143,12 @@
                             <div ng-repeat="product in products" style='margin-top:5px;'>
                                 <label class="col-sm-2 control-label">产品意向:</label>
                                 <div class="col-sm-4">
-                                    <select class="form-control" ng-model='product.type' ng-options='x.name for x in purposes'>
-                                        <option value="">{{productList}}</option>
+                                    <select class="form-control" ng-model='product.type'  >
+                                        <option ng-repeat="pu in purposes" value="{{pu.id}}" ng-selected="abbb(pu.name,product.name)">{{pu.name}}</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" placeholder="价格" ng-model="priceList">
+                                    <input type="text" class="form-control" placeholder="价格" ng-model="product.price">
                                 </div>
                                 <span class="glyphicon glyphicon-remove" id='del' aria-hidden="true" ng-click="removeProduct(product)">
                                 </span>
