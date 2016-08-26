@@ -20,7 +20,15 @@
     margin-right: 5px;
 }
 
-
+/*编辑客户*/
+#newProduct {
+    position: relative;
+}
+#newProduct #plus{
+    position: absolute;
+    right: 100px;
+    top: 5px;
+}
 /*main.html 维护 历史记录*/
 
 

@@ -29,25 +29,27 @@ app.controller('addClientCtrl',function($scope,$http,$location){
     // $scope.$watch = ('new_contractPhone',function(){$scope.test();});
     // $scope.$watch = ('new_deptName',function(){$scope.test();});
     // $scope.incomplete = false;
-    $scope.test = function(){
-        if (!$scope.new_company ||!$scope.new_contact ||!$scope.new_contractPhone ||!$scope.new_deptName ) {
-            $scope.incomplete = true;
-        }else{
-            $scope.incomplete = false;
-        }
-    }
+    // $scope.test = function(){
+    //     if (!$scope.new_company ||!$scope.new_contact ||!$scope.new_contractPhone ||!$scope.new_deptName ) {
+    //         $scope.incomplete = true;
+    //     }else{
+    //         $scope.incomplete = false;
+    //     }
+    // }
     
 //保存
     $scope.saveClient = function(){
+        console.log( $scope.new_company)
+        console.log($sxope.product.value)
       $http.post("/crm/client/save",    
-        {"company": !$scope.new_company,
+        {"company": $scope.new_company,
           "contractname": $scope.new_contact,
           "contractphone": $scope.new_contractPhone,
           "deptname": $scope.new_deptName,
           "products": [
             {
               "id": $scope.products.$index.id,
-              "price":$scope
+              "price":$scope.product.value
             }
           ],
           "testaccount": $scope.new_testAccount,

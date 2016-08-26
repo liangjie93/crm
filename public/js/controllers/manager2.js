@@ -54,7 +54,7 @@ app.controller('manager2Ctrl', function ($scope,$http) {
         $scope.remark = $scope.salesmans[$index].remark;
         $scope.editId = $scope.salesmans[$index].id; 
         console.log($scope.editId);
-        //编辑后保存
+        //编辑后保存 更新
         $scope.saveEditClient = function(editId){
             console.log($scope.salesmans[$index]);
             console.log($scope.editId);
@@ -83,19 +83,19 @@ app.controller('manager2Ctrl', function ($scope,$http) {
 //确认删除？    
     $scope.wantDel = function($index){
         console.log($index);
-        $scope.delId = $scope.salesmans[$index].id;
-        console.log($scope.delId);  //点击后会弹出三个叠加的弹框，给弹框的删除按钮一个唯一的id
+        $scope.id = $scope.salesmans[$index].id;
+        console.log($scope.id);  //点击后会弹出三个叠加的弹框，给弹框的删除按钮一个唯一的id
     //删除
-        $scope.delMarket = function(delId){
+        $scope.delMarket = function(id){
             console.log($scope.salesmans[$index]);
-            $http.post("/crm/user/delete/"+$scope.salesmans[$index].id)
-            .success(function(result){
-                if(result.code == 0){
+            // $http.post("/crm/user/delete/"+$scope.id).success(function(result){
+                // if(result.code == 0){
                     // $scope.salesmans.splice($index,1);
                     
-                }
+                // }
                 $('#wantDel').modal('hide');//关闭模态框
-            })
+                $scope.load();//数据刷新
+            // })
         }
     }    
  

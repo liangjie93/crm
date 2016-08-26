@@ -67,7 +67,25 @@
                 <td>
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#maintain">查看进展</button>
                     <button type="button" class="btn btn-client btn-primary" data-toggle="modal" data-target="#editClient"  ng-click='editClient($index)'>编辑</button>
-                    <button type="button" class="btn btn-danger" ng-click='delClient($index)'>删除</button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#wantDel" ng-click='wantDel($index)'>删除</button>
+                    <!-- 确认删除 model -->
+                    <div class="modal fade myModal" id='wantDel' tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">确认删除？</h4>
+                          </div>
+
+                          <div class="modal-footer">
+                            
+                            <button type="button" class="btn btn-primary btn-warning" ng-click='delClient(id)'>确认</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.modal -->
                 </td>
             </tr>
         </table>
@@ -123,34 +141,21 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group has-feedback">
-                            <label class="col-sm-2 control-label">产品意向:</label>
-                            <div>
+                        <div class="form-group has-feedback" id='newProduct'>
+                            <div ng-repeat="product in products" style='margin-top:5px;'>
+                                <label class="col-sm-2 control-label">产品意向:</label>
                                 <div class="col-sm-4">
-                                    <select class="form-control"  ng-model='product.type' ng-options='x.name for x in purposes'>
-                                        <option value="">{{productsList}}</option>
+                                    <select class="form-control" ng-model='product.type' ng-options='x.name for x in purposes'>
+                                        <option value="">{{productList}}</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control"  placeholder="价格" ng-model="product.value" ng-model='perPrice[0]'>
+                                    <input type="text" class="form-control" placeholder="价格" ng-model="priceList">
                                 </div>
-                                <div class="glyphicon glyphicon-plus" id='plus' aria-hidden="true" ng-click="addProduct()"></div>
-
-                                <div id='newProduct' ng-repeat="product in products" style='margin-top:5px;'>
-                                    <label class="col-sm-2 control-label"></label>
-                                    <div class="col-sm-4">
-                                        <select class="form-control" ng-model='product.type' ng-options='x.name for x in purposes'>
-                                            <option value="">下拉选择</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <input type="text" class="form-control" placeholder="价格">
-                                    </div>
-                                    <div class="glyphicon glyphicon-remove" id='del' aria-hidden="true" ng-click="removeProduct(product)">
-                                    </div>
-                                </div>
-                                    
+                                <span class="glyphicon glyphicon-remove" id='del' aria-hidden="true" ng-click="removeProduct(product)">
+                                </span>
                             </div>
+                            <span class="glyphicon glyphicon-plus" id='plus' aria-hidden="true" ng-click="addProduct()"></span>                 
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">测试账号:</label>
@@ -161,21 +166,24 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">备注:</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" placeholder="补充说明相关的其他情况">
+                                <input type="text" class="form-control" placeholder="补充说明相关的其他情况" ng-model='remark'>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label"><span class='sign'>*</span>上传名片或营业执照:</label>
                             <div class="col-sm-4" ng-controller="UploaderController">
                                 <div class='upload'>                   
-                                    <button type="button" class="btn btn-warning" style='width: 100%;'>上传图片</button>
+                                    <button type="button" class="btn btn-warning" style='width: 100%;'>选择图片</button>
+
                                     <input type="file" file-model="myFile"/> 
                                     <img ng-src="{{imageSrc}}"/>
+
                                </div>                
                             </div>
                         </div> 
                         <div class="form-group" style='text-align: center;'>
-                            <button type="button" class="btn btn-warning">保存</button>
+                            <button type="button" class="btn btn-danger">上传图片</button>
+                            <button type="button" class="btn btn-warning" ng-click=saveEditClient()>保存</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                         </div>
                     </form>

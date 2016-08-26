@@ -1,17 +1,17 @@
 app.controller('manager1Ctrl', function($scope,$http,$filter){
 
-    //管路员查看销售经理
+//管路员查看销售经理
     $http.post("/crm/user/lists",{"start_page": 0,"page_size": 0})
     .success(function(response) {
         $scope.salesmans = response.data.list;
-        console.log(response.data.list)
+        // console.log(response.data.list)
     });
     
-    //获取客户信息
+//获取客户信息
     $http.post("/crm/client/search",{"start_page": 0,"page_size": 0,"select_type": "string","seller_id": 0})
     .success(function(response) {
         $scope.clients = response.data.list;
-        console.log(response.data.list);
+        // console.log(response.data.list);
         // var clients = response.data.list;
         // for(i in clients){
         //     console.log(clients[i].selectType)
@@ -20,25 +20,22 @@ app.controller('manager1Ctrl', function($scope,$http,$filter){
         //     }
         // }
         
-        
 
-    //日期
+//日期格式化
     $filter("date")($scope.lasttime, "yyyy-MM-dd");
 
-    //输入提示框    
+//输入提示框    
         var tip = response.data.list; 
         $scope.tip = tip;
         var tipArr = [];
         for(var i in tip){
             tipArr.push(tip[i].company + '-' + tip[i].sellName);
-
             var list = tipArr;
-            console.log(list);
+            // console.log(list);
             //测试用的数据
             // var list = ["浙江-who0", "上海-111", "浙江-122", "浙江-123", "上海-211", "上海-222", "浙江-223", "浙江-311", "北京-322", "浙江-333", "浙江-411", "北京-422", "北京-433", "浙江-511", "浙江-522",'浙江-533'];
             var old_value = "";
             var highlightindex = -1;   //高亮
-
             //自动完成
             function AutoComplete(auto, search, mylist) {
                 if ($("#" + search).val() != old_value || old_value == "") {
@@ -125,48 +122,83 @@ app.controller('manager1Ctrl', function($scope,$http,$filter){
         }
     });  
 
-    //生成报表
+//生成报表
     $scope.export = function(){
-        $http.post("/crm/client/export")
+        $http.post("/crm/client/export",{})
         .success(function(result){
+            console.log(result);
             if(result.code == 0){
-                return
+                
             }
         })
     }
 
-    //编辑客户
+//编辑客户
     $scope.editClient = function($index){                        
-        console.log($scope.clients[$index]);
+        console.log($scope.clients[$index]);//当前用户信息
+        $scope.id = $scope.clients[$index].id;
         $scope.company = $scope.clients[$index].company;
         $scope.contractName = $scope.clients[$index].contractName;
         $scope.contractPhone = $scope.clients[$index].contractPhone;
         $scope.deptName = $scope.clients[$index].deptName;           
         $scope.testAccount = $scope.clients[$index].testAccount;
         $scope.sellName = $scope.clients[$index].sellName;
-        console.log($scope.clients[$index].sellName);
-        $scope.products = $scope.clients[$index].products;
-        // var products.id = $scope.clients[$index].products;
-        console.log( $scope.products)
-        // var productId = products[$index].id;
-        // console.log(productId)
-        for(i in $scope.products){
-            var productsList = $scope.products[i].name;
-            console.log($scope.products[i].name)
+        $scope.products = $scope.clients[$index].products;//产品 价格
+        $scope.remark =  $scope.clients[$index].remark;
+        $scope.price = $scope.clients[$index].price;//总价
+        console.log($scope.products)
+        console.log($scope.price);
+
+        for(var i in $scope.products){
+            $scope.productList = $scope.products[i].name;
+            $scope.priceList = $scope.products[i].price;
+            $scope.idList = $scope.products[i].id;
+
+            console.log($scope.products[i])
+        //保存  更新客户信息
+            $scope.saveEditClient = function(){
+                console.log($scope.remark);
+                console.log($scope.priceList);
+                console.log($scope.idList);
+                console.log($scope.productList)
+                console.log($scope.sellName)
+                $http.post("/crm/client/modify",{
+                  "id": $scope.id,
+                  "company": $scope.company,
+                  "contractname": $scope.contractName,
+                  "contractphone": $scope.contractPhone,
+                  "deptname":  $scope.deptName,
+                  "products": [
+                    {
+                      "id": $scope.idList,
+                      "price": $scope.priceList
+                    }
+                  ],
+                  "testaccount": $scope.testAccount,
+                  "remark": $scope.remark,
+                  "businesslicense": "url",
+                  "price": $scope.price
+                }).success(function(data){
+                    console.log(data)
+                    if (data.code == 0) {
+                        
+                    }else if(data.code == 0){
+                        alert()
+                    }
+                }) 
+            }
+
+
         }  
 
-        // $scope.prePrice = $scope.clients[$index].prePrice;
-        // $scope.progress = $scope.clients[$index].progress;//进展
-        // $scope.selectSalesman = $scope.clients[$index].manager;  
-                    
     }
-    //产品
+//产品
     $http.post('/crm/product/lists',{})
     .success(function(response){
         $scope.purposes = response.data;
         console.log(response.data);
     })
-    //产品意向 增加删除
+//产品意向 增加删除
     $scope.products = [{type:''}];
     $scope.addProduct = function() {
         $scope.products.push({type:''});
@@ -176,6 +208,21 @@ app.controller('manager1Ctrl', function($scope,$http,$filter){
         $scope.products.splice(index, 1);
     };
 
+//删除客户
+    $scope.wantDel = function($index){
+        console.log($index);
+        $scope.id = $scope.clients[$index].id;
+        console.log($scope.id);
+        $scope.delClient = function(id){
+            console.log($scope.clients[$index]);
+            // $http.post("/crm/client/delete/"+$scope.id).success(function(result){
+                // if(result.code == 0){
+                    // $scope.clients.splice($index,1)
+                // }
+                $('#wantDel').modal('hide');//关闭模态框
+            // })
+        }
+    }
 //分页
     $scope.page = {
         "pageSize":10,"pageNo":1,"totalCount":99};
