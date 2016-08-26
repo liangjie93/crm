@@ -1,4 +1,4 @@
-app.controller('addClientCtrl',function($scope,$http){
+app.controller('addClientCtrl',function($scope,$http,$location){
    
 //销售经理
     $http.post("/crm/user/lists",{"start_page": 0,"page_size": 0})
@@ -12,7 +12,7 @@ app.controller('addClientCtrl',function($scope,$http){
         console.log(response.data)
         $scope.purposes = response.data;
     })    
-//产品意向
+//产品意向 增加删除
     $scope.products = [{type:''}];
     // $http.get("../data/myJson.json").success(function(response) {$scope.purposes = response.purposes;});
     $scope.addProduct = function() {
@@ -38,7 +38,32 @@ app.controller('addClientCtrl',function($scope,$http){
     }
     
 //保存
-    // $scope.saveClient = function(){
-    //   $http.post()
-    // }
+    $scope.saveClient = function(){
+      $http.post("/crm/client/save",    
+        {"company": !$scope.new_company,
+          "contractname": $scope.new_contact,
+          "contractphone": $scope.new_contractPhone,
+          "deptname": $scope.new_deptName,
+          "products": [
+            {
+              "id": $scope.products.$index.id,
+              "price":$scope
+            }
+          ],
+          "testaccount": $scope.new_testAccount,
+          "remark": $scope.new_remark,
+          "businesslicense": "string",
+          "price": "string"
+        }).success(function(data){
+            console.log(data);
+            if(data.code == 0 ){
+                // $scope.toUrl = function(path){
+                //     $location.path(path);
+                //     console.log(path);
+                // }
+            }else if(data.code == 10032){
+                alert("...")
+            }
+        })
+    }
 })

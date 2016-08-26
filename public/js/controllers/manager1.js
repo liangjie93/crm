@@ -1,6 +1,6 @@
 app.controller('manager1Ctrl', function($scope,$http,$filter){
 
-    //销售经理
+    //管路员查看销售经理
     $http.post("/crm/user/lists",{"start_page": 0,"page_size": 0})
     .success(function(response) {
         $scope.salesmans = response.data.list;
@@ -12,9 +12,17 @@ app.controller('manager1Ctrl', function($scope,$http,$filter){
     .success(function(response) {
         $scope.clients = response.data.list;
         console.log(response.data.list);
+        // var clients = response.data.list;
+        // for(i in clients){
+        //     console.log(clients[i].selectType)
+        //     if(clients[i].selectType == "B"){
+        //         $(".second-section .table #type").css("background-color","blue")
+        //     }
+        // }
+        
+        
 
     //日期
-    // $scope.client.lasttime = new Date();
     $filter("date")($scope.lasttime, "yyyy-MM-dd");
 
     //输入提示框    
@@ -135,15 +143,31 @@ app.controller('manager1Ctrl', function($scope,$http,$filter){
         $scope.contractPhone = $scope.clients[$index].contractPhone;
         $scope.deptName = $scope.clients[$index].deptName;           
         $scope.testAccount = $scope.clients[$index].testAccount;
-        // $scope.products = $scope.clients[$index].products;
+        $scope.sellName = $scope.clients[$index].sellName;
+        console.log($scope.clients[$index].sellName);
+        $scope.products = $scope.clients[$index].products;
+        // var products.id = $scope.clients[$index].products;
+        console.log( $scope.products)
+        // var productId = products[$index].id;
+        // console.log(productId)
+        for(i in $scope.products){
+            var productsList = $scope.products[i].name;
+            console.log($scope.products[i].name)
+        }  
+
         // $scope.prePrice = $scope.clients[$index].prePrice;
         // $scope.progress = $scope.clients[$index].progress;//进展
-        // $scope.selectSalesman = $scope.clients[$index].manager;                
+        // $scope.selectSalesman = $scope.clients[$index].manager;  
+                    
     }
-    
+    //产品
+    $http.post('/crm/product/lists',{})
+    .success(function(response){
+        $scope.purposes = response.data;
+        console.log(response.data);
+    })
     //产品意向 增加删除
     $scope.products = [{type:''}];
-    $http.get("../data/myJson.json").success(function(response) {$scope.purposes = response.purposes;});
     $scope.addProduct = function() {
         $scope.products.push({type:''});
     };

@@ -43,7 +43,6 @@
                     <input type="text" class="form-control"  placeholder="价格" ng-model="product.value">
                 </div>
                 <div class="glyphicon glyphicon-plus" id='plus' aria-hidden="true" ng-click="addProduct()"></div>
-
                 <div id='newProduct' ng-repeat="product in products" style='margin-top:5px;'>
                     <label class="col-sm-2 control-label"></label>
                     <div class="col-sm-4">
@@ -70,7 +69,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">备注:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" placeholder="补充说明相关的其他情况">
+                <input type="text" class="form-control" placeholder="补充说明相关的其他情况" ng-model='new_remark'>
             </div>
         </div>
         <div class="form-group">
@@ -85,7 +84,7 @@
 
         </div> 
         <div class="form-group" style='text-align: center;'>
-            <button type="button" class="btn btn-warning" ng-disabled="incomplete" ng-click='saveClient()'>保存</button>
+            <button type="button" class="btn btn-warning" ng-disabled="incomplete" ng-click='saveClient()' ng-click='toUrl(#/manager1)'>保存</button>
             <a href="#/manager1"><button type="button" class="btn btn-default" data-dismiss="modal">取消</button></a>
         </div>
     </form>

@@ -35,7 +35,7 @@
         </div>
     </div>
     <!--first-section end -->
-    <!--second-section 表格-->
+    <!--second-section 客户列表-->
     <div class="second-section">
         <table class="table">
             <tr class='title'>
@@ -51,7 +51,8 @@
             <tr ng-repeat='client in clients'>
                 <td>{{client.company}}</td>
                 <td>
-                    <p><span>{{client.selectType}}</span>&nbsp{{client.contractName}}
+                    <p id="type">{{client.selectType}}</p id="type">
+                    <p>{{client.contractName}}</p>
                     <p>{{client.deptName}}
                     <p>{{client.contractPhone}}
                     <p>测试账号：{{client.testAccount}}
@@ -90,34 +91,44 @@
                     <h4 class="modal-title" id="myModalLabel"></h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal">
-                        <div class="form-group">
+                    <form class="form-horizontal" name="myForm" novalidate>
+                        <div class="form-group has-feedback">
                             <label for="inputName1" class="col-sm-2 control-label"><span class='sign'>*</span>公司名:</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" id="inputName1" placeholder="建议输入框（请输入公司全称）" ng-model='company'>
+                                <input type="text" name="company" class="form-control" id="inputName1" placeholder="建议输入框（请输入公司全称）" required ng-model='company'>
+                                 <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="myForm.company.$dirty && myForm.company.$valid"></span>
+
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group has-feedback">
                             <label for="inputName2" class="col-sm-2 control-label"><span class='sign'>*</span>联系人:</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control contact" id="inputName2" placeholder="姓名" ng-model='contractName'>
+                                <input type="text" name='contractName' class="form-control contact" id="inputName2" placeholder="姓名" required ng-model='contractName'>
+                                <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="myForm.contractName.$dirty && myForm.contractName.$valid"></span>
                             </div>
-                            <div class="col-sm-3"> <input type="text" class="form-control contact" id="inputName3" placeholder="联系电话" ng-model='contractPhone'></div>
-                            <div class="col-sm-3"><input type="text" class="form-control contact" id="inputName4" placeholder="部门或职位" ng-model='deptName'></div>
+                            <div class="col-sm-3"> 
+                                <input type="text" name='contractPhone' class="form-control contact" id="inputName3" placeholder="联系电话" ng-pattern="/^1[3|4|5|7|8]\d{9}$/" ng-minlength="11" ng-maxlength="11" required ng-model='contractPhone'>
+                                <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="myForm.contractPhone.$dirty && myForm.contractPhone.$valid"></span>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" name='deptName' class="form-control contact" id="inputName4" placeholder="部门或职位" required ng-model='deptName'>
+                                <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="myForm.deptName.$dirty && myForm.deptName.$valid"></span>
+                            </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group has-feedback">
                             <label class="col-sm-2 control-label">销售经理:</label>
                             <div class="col-sm-4">
-                                <select class="form-control" ng-model='selectSalesman' ng-options='x.name for x in salesmans'>
+                                <select class="form-control" ng-model='sellName' ng-options='x.name for x in salesmans'>
+                                <option value="">{{sellName}}</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group has-feedback">
                             <label class="col-sm-2 control-label">产品意向:</label>
                             <div>
                                 <div class="col-sm-4">
                                     <select class="form-control"  ng-model='product.type' ng-options='x.name for x in purposes'>
-                                        <option value="">下拉选择</option>
+                                        <option value="">{{productsList}}</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-3">
