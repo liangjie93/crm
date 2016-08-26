@@ -62,7 +62,7 @@
                 <td>{{client.price}}</td>
                 <td>{{client.lastMessage}}</td>
                 <td>{{client.sellName}}</td>
-                <td>{{client.lasttime}}</td>
+                <td>{{client.lasttime|date:'yyyy年MM月dd日'}}</td>
                 <td>
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#maintain">查看进展</button>
                     <button type="button" class="btn btn-client btn-primary" data-toggle="modal" data-target="#editClient"  ng-click='editClient($index)'>编辑</button>

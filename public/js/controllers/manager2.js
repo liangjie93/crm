@@ -11,11 +11,12 @@ app.controller('manager2Ctrl', function ($scope,$http) {
     $scope.load();
     
 //添加
-    $scope.$watch('new_name',function(){$scope.test2();});
-    $scope.$watch('new_phone',function(){$scope.test2();});
-    $scope.$watch('new_account',function(){$scope.test2();});
-    $scope.$watch('new_password',function(){$scope.test2();});
-    $scope.test2 = function(){   
+    //保存按钮禁用
+    $scope.$watch('new_name',function(){$scope.test();});
+    $scope.$watch('new_phone',function(){$scope.test();});
+    $scope.$watch('new_account',function(){$scope.test();});
+    $scope.$watch('new_password',function(){$scope.test();});
+    $scope.test = function(){   
         if (!$scope.new_name ||!$scope.new_phone ||!$scope.new_account ||!$scope.new_password ) {
             $scope.new_incomplete = true;
         }else{
@@ -40,6 +41,8 @@ app.controller('manager2Ctrl', function ($scope,$http) {
                 alert("此账号已存在")
             }else if(data.code ==10027){
                 alert("用户没有登陆账号")
+            }else if(data.code == 10023){
+                alert("添加用户请补全信息")
             }
         })
     }  
@@ -49,10 +52,8 @@ app.controller('manager2Ctrl', function ($scope,$http) {
         $scope.name = $scope.salesmans[$index].name;
         $scope.phone = $scope.salesmans[$index].phone;
         $scope.remark = $scope.salesmans[$index].remark;
-        
         $scope.editId = $scope.salesmans[$index].id; 
         console.log($scope.editId);
-
         //编辑后保存
         $scope.saveEditClient = function(editId){
             console.log($scope.salesmans[$index]);
@@ -63,7 +64,7 @@ app.controller('manager2Ctrl', function ($scope,$http) {
                 if(data.code == 0 ){
                     $('#editMarket').modal('hide');//关闭模态框
                     $scope.password='';
-                    // $scope.load();//数据刷新
+                    $scope.load();//数据刷新
                 }
             })
         }        
@@ -71,7 +72,6 @@ app.controller('manager2Ctrl', function ($scope,$http) {
     }
     $scope.$watch('name',function(){$scope.test2();});
     $scope.$watch('phone',function(){$scope.test2();});
-    // $scope.$watch('password',function(){$scope.test2();});
     $scope.test2 = function(){   
         if (!$scope.name ||!$scope.phone) {
             $scope.incomplete = true;
@@ -81,27 +81,24 @@ app.controller('manager2Ctrl', function ($scope,$http) {
     }
 
 //确认删除？    
-    $scope.conDel = false;
     $scope.wantDel = function($index){
         console.log($index);
-        $scope.conDel = true; 
         $scope.delId = $scope.salesmans[$index].id;
         console.log($scope.delId);  //点击后会弹出三个叠加的弹框，给弹框的删除按钮一个唯一的id
     //删除
         $scope.delMarket = function(delId){
             console.log($scope.salesmans[$index]);
-            // $http.post("/crm/user/delete/"+$scope.salesmans[$index].id)
-            // .success(function(result){
-            //     if(result.code == 0){
-            //          $scope.salesmans.splice($index,1);
-            // })
-            $scope.conDel = false;
+            $http.post("/crm/user/delete/"+$scope.salesmans[$index].id)
+            .success(function(result){
+                if(result.code == 0){
+                    // $scope.salesmans.splice($index,1);
+                    
+                }
+                $('#wantDel').modal('hide');//关闭模态框
+            })
         }
-    }
-//取消    
-    $scope.cancelDel = function(){
-        $scope.conDel = false;
     }    
+ 
 
 //分页
     $scope.page = {

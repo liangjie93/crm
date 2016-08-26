@@ -1,4 +1,4 @@
-app.controller('manager1Ctrl', function($scope,$http){
+app.controller('manager1Ctrl', function($scope,$http,$filter){
 
     //销售经理
     $http.post("/crm/user/lists",{"start_page": 0,"page_size": 0})
@@ -11,7 +11,11 @@ app.controller('manager1Ctrl', function($scope,$http){
     $http.post("/crm/client/search",{"start_page": 0,"page_size": 0,"select_type": "string","seller_id": 0})
     .success(function(response) {
         $scope.clients = response.data.list;
-        console.log(response.data.list)
+        console.log(response.data.list);
+
+    //日期
+    // $scope.client.lasttime = new Date();
+    $filter("date")($scope.lasttime, "yyyy-MM-dd");
 
     //输入提示框    
         var tip = response.data.list; 

@@ -29,13 +29,13 @@ app.controller('addClientCtrl',function($scope,$http){
     // $scope.$watch = ('new_contractPhone',function(){$scope.test();});
     // $scope.$watch = ('new_deptName',function(){$scope.test();});
     // $scope.incomplete = false;
-    // $scope.test = function(){
-    //     if (!$scope.new_company ||!$scope.new_contact ||!$scope.new_contractPhone ||!$scope.new_deptName ) {
-    //         $scope.incomplete = true;
-    //     }else{
-    //         $scope.incomplete = false;
-    //     }
-    // }
+    $scope.test = function(){
+        if (!$scope.new_company ||!$scope.new_contact ||!$scope.new_contractPhone ||!$scope.new_deptName ) {
+            $scope.incomplete = true;
+        }else{
+            $scope.incomplete = false;
+        }
+    }
     
 //保存
     // $scope.saveClient = function(){
