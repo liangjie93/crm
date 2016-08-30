@@ -4,8 +4,7 @@ app.controller('addClientCtrl',function($scope,$http,$location){
     $http.post("/crm/user/lists",{"start_page": 0,"page_size": 0})
     .success(function(response) {
         $scope.salesmans = response.data.list;
-        // console.log(response.data.list)
-        // console.log($scope.salesmans)
+        console.log($scope.salesmans)
 
     });
 //产品
@@ -24,8 +23,10 @@ app.controller('addClientCtrl',function($scope,$http,$location){
         $scope.products.splice(index, 1);
     };
 //保存 
+    // if(!$scope.new_company ||)
     $scope.saveClient = function(){
-        // console.log($scope.new_company)
+        console.log(111)
+        console.log($scope.id)
         // console.log($scope.new_contact)
         // console.log($scope.new_contractPhone)
         // console.log($scope.new_deptName)
@@ -36,7 +37,7 @@ app.controller('addClientCtrl',function($scope,$http,$location){
             "contractName": $scope.new_contact,
             "contractPhone": $scope.new_contractPhone,
             "deptname":  $scope.new_deptName,
-            "managerid":$scope.selectSalesman.id,
+            "managerid":$scope.managerid,
             "products":$scope.products,
             "testAccount": $scope.testAccount,
             "remark": $scope.remark,
@@ -52,15 +53,13 @@ app.controller('addClientCtrl',function($scope,$http,$location){
             if (data.code == 0) { 
                 console.log(data)
                 $scope.toUrl = function(path){
-                    $location.path(path);
-                    console.log(path);
+                    path = "#/manager1"
                 }
             }else{
                     alert("信息不能为空")
                 }
         })    
     }
-
 
     // $scope.uploadImg = function(){
     //     $http.post("/crm/img/upload").success(function(result){
@@ -76,18 +75,73 @@ app.controller('addClientCtrl',function($scope,$http,$location){
             sequentialUploads: true  
         }).bind('fileuploadprogress', function (e, data) {  
             var progress = parseInt(data.loaded / data.total * 100, 10);  
-            $("#weixin_progress").css('width',progress + '%');  
-            $("#weixin_progress").html(progress + '%');  
+            $("#progress").css('width',progress + '%');  
+            $("#progress").html(progress + '%');  
         }).bind('fileuploaddone', function (e, data) {  
-            $("#weixin_show").attr("src","__PUBLIC__/"+data.result);  
-            $("#weixin_upload").css({display:"none"});  
-            $("#weixin_cancle").css({display:""});  
+            $("#show").attr("src","__PUBLIC__/"+data.result);  
+            $("#upload").css({display:"none"});  
+            $("#cancle").css({display:""});  
         });  
                  
     });  
 
-
+   
 })
-
+// app.directive('fileModel', ['$parse', function ($parse) {
+//   return {
+//     restrict: 'A',
+//     link: function(scope, element, attrs, ngModel) {
+//       var model = $parse(attrs.fileModel);
+//       var modelSetter = model.assign;
+//       element.bind('change', function(event){
+//         scope.$apply(function(){
+//           modelSetter(scope, element[0].files[0]);
+//         });
+//         //附件预览
+//            scope.file = (event.srcElement || event.target).files[0];
+//         scope.getFile();
+//       });
+//     }
+//   };
+// }]);
+// app.controller('addClientCtrl', function($scope, fileReader){
+//     $scope.getFile = function () {
+//         fileReader.readAsDataUrl($scope.file, $scope)
+//                       .then(function(result) {
+//                           $scope.imageSrc = result;
+//                       });
+//     };
+// })
+// app.factory('fileReader', ["$q", "$log", function($q, $log){
+//   var onLoad = function(reader, deferred, scope) {
+//     return function () {
+//       scope.$apply(function () {
+//         deferred.resolve(reader.result);
+//       });
+//     };
+//   };
+//   var onError = function (reader, deferred, scope) {
+//     return function () {
+//       scope.$apply(function () {
+//         deferred.reject(reader.result);
+//       });
+//     };
+//   };
+//   var getReader = function(deferred, scope) {
+//     var reader = new FileReader();
+//     reader.onload = onLoad(reader, deferred, scope);
+//     reader.onerror = onError(reader, deferred, scope);
+//     return reader;
+//   };
+//   var readAsDataURL = function (file, scope) {
+//     var deferred = $q.defer();
+//     var reader = getReader(deferred, scope);         
+//     reader.readAsDataURL(file);
+//     return deferred.promise;
+//   };
+//   return {
+//     readAsDataUrl: readAsDataURL  
+//   };
+// }])
 
 

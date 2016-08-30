@@ -424,28 +424,28 @@ app.controller('manager1Ctrl', function($scope,$http,$filter){
         .success(function(response){
             $scope.records = response.data.list;
             // console.log(response)
-            $scope.save=false
+            // $scope.save=false
          //提交進展
-            if($scope.new_progress != ""){
-                $scope.submit = function(){
-                    var data = {
-                          "message": $scope.new_progress,
-                          "selectType": $scope.type, //ng-model='type' $scope.type值为value='{{type.id}}' ；undefined时可以提交 所以在没有选择时 不会报错
-                          "clientId": $scope.clientId   
-                    }
-                    console.log(data)
-                    // $http.post("/crm/client/process/save",data)
-                    // .success(function(result){
-                    //     if(result.code == 0){
-                    //         $scope.new_progress='';
-                    //         $('#maintain').modal('hide');
-                    //     }
-                    //     $scope.load();
-                    // });
-                  
+            
+            $scope.submit = function(){
+                var data = {
+                      "message": $scope.new_progress,
+                      "selectType": $scope.type, //ng-model='type' $scope.type值为value='{{type.id}}' ；undefined时可以提交 所以在没有选择时 不会报错
+                      "clientId": $scope.clientId   
                 }
-            }else{
-                alert('请输入信息')
+                console.log(data)
+                if($scope.new_progress != ""){
+                    $http.post("/crm/client/process/save",data)
+                    .success(function(result){
+                        if(result.code == 0){
+                            $scope.new_progress='';
+                            $('#maintain').modal('hide');
+                        }
+                        $scope.load();
+                    });
+                } else{
+                    alert('请输入信息') 
+                }
             }
             
         })

@@ -25,10 +25,12 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">销售经理:</label>
             <div class="col-sm-4">
-                <select class="form-control" ng-model='selectSalesman' ng-options='x.name for x in salesmans' ng-show='judge'>
+                <select class="form-control" ng-model='managerid' ng-options='x.name for x in salesmans'  ng-show='judge'><!-- 销售经理id -->
+                    <option value="">请选择销售经理</option>
+                    <option ng-repeat="x in salesmans" value="x.id">{{x.name}}</option>
                 </select>
-                <select class="form-control" ng-hide ='judge' ng-disabled="true" ng-model='user'>
-                    <option value="{{user}}" selected="select">{{user}}</option>
+                <select class="form-control" ng-hide ='judge' ng-disabled="true" ng-model='user' ng-model='managerid'>
+                    <option value="{{managerid}}" selected="select">{{user}}</option> <!--销售人员登录 在新建客户时 下拉框禁用 且默认自己-->
                 </select>
             </div>
         </div>
@@ -68,20 +70,20 @@
             <div class="col-sm-4 upload fileupload-buttonbar" >
                 <!-- <button type="button" class="btn btn-warning" style='width: 100%;'>选择图片</button> -->
                <!-- <input id="fileupload" type="file" name="files[]" multiple> -->
-                <img id="weixin_show" style="height:180px;margin-top:10px;margin-bottom:8px;" src=" " data-holder-rendered="true">  
-                <div class="progress progress-striped active" role="progressbar" aria-valuemin="10" aria-valuemax="100" aria-valuenow="0"><div id="weixin_progress" class="progress-bar progress-bar-success" style="width:0%;"></div></div>  
+                <img id="show" style="height:180px;margin-top:10px;margin-bottom:8px;" ng-src="{{imageSrc}}" data-holder-rendered="true">  
+                <div class="progress progress-striped active" role="progressbar" aria-valuemin="10" aria-valuemax="100" aria-valuenow="0"><div id="progress" class="progress-bar progress-bar-success" style="width:0%;"></div></div>  
                 <div class="caption" align="center">  
-                <span id="weixin_upload" class="btn btn-primary fileinput-button">  
+                <span id="upload" class="btn btn-primary fileinput-button">  
                 <span>上传</span>  
-                <input type="file" id="uploadImage" name="uploadImage" multiple>  
+                <input type="file" id="uploadImage" name="uploadImage" multiple  file-model="myFile">  
                 </span>  
-                <a id="weixin_cancle" href="javascript:void(0)" class="btn btn-warning" role="button" onclick="cancleUpload('weixin')" style="display:none">删除</a>  
+                <a id="cancle" href="javascript:void(0)" class="btn btn-warning" role="button" onclick="cancleUpload('weixin')" style="display:none">删除</a>  
             </div>
            </div>
         </div> 
         <div class="form-group" style='text-align: center;'>
            <!--  <button type="button" class="btn btn-danger" ng-click='uploadImg()'>上传图片</button> -->
-            <button type="button" class="btn btn-warning" ng-disabled="incomplete" ng-click='saveClient()' ng-click='toUrl(#/manager1)'>保存</button>
+            <button type="button" class="btn btn-warning" ng-disabled="incomplete" ng-click='saveClient()' ng-click='toUrl(path)'>保存</button>
             <a href="#/manager1"><button type="button" class="btn btn-default" data-dismiss="modal">取消</button></a>
         </div>
     </form>
