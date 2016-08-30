@@ -415,10 +415,8 @@ app.controller('manager1Ctrl', function($scope,$http,$filter){
     ];
 
     $scope.progress = function($index){
-        // console.log($scope.clients[$index].selectType)
         $scope.new_progress = '';
         $scope.clientId = $scope.clients[$index].id;
-        // $scope.typeId = $scope.type.id;
         $filter("date")($scope.lasttime, "yyyy-MM-dd");
        
         $scope.company = $scope.clients[$index].company;
@@ -428,27 +426,28 @@ app.controller('manager1Ctrl', function($scope,$http,$filter){
             // console.log(response)
             $scope.save=false
          //提交進展
-            $scope.submit = function(){ 
-                console.log($scope.type) 
-                console.log($scope.new_progress)
-                var data = {
-                      "message": $scope.new_progress,
-                      "selectType": $scope.type, //ng-model='type' $scope.type值为value='{{type.id}}' ；undefined时可以提交 所以在没有选择时 不会报错
-                      "clientId": $scope.clientId   
+            if($scope.new_progress != ""){
+                $scope.submit = function(){
+                    var data = {
+                          "message": $scope.new_progress,
+                          "selectType": $scope.type, //ng-model='type' $scope.type值为value='{{type.id}}' ；undefined时可以提交 所以在没有选择时 不会报错
+                          "clientId": $scope.clientId   
+                    }
+                    console.log(data)
+                    // $http.post("/crm/client/process/save",data)
+                    // .success(function(result){
+                    //     if(result.code == 0){
+                    //         $scope.new_progress='';
+                    //         $('#maintain').modal('hide');
+                    //     }
+                    //     $scope.load();
+                    // });
+                  
                 }
-                console.log(data)
-                $http.post("/crm/client/process/save",data)
-                .success(function(result){
-                    if($scope.new_progress != ""){
-                        if(result.code == 0){
-                            $scope.new_progress='';
-                            $('#maintain').modal('hide');
-                        }
-                    }else {alert("请输入信息") }
-                $scope.load();                           
-                });
-              
+            }else{
+                alert('请输入信息')
             }
+            
         })
    
 

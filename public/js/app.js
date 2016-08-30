@@ -17,7 +17,7 @@ app.controller("appCtrl",function($scope){
                     $scope.judge = true;
                     
                 }else{
-                    $scope.user = permissionList.account;
+                    $scope.user = permissionList.name;//销售人员登录 在新建客户时 下拉框默认自己
                 }
 
             })
