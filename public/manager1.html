@@ -3,24 +3,27 @@
     <div class="first-section">
         <div class="first-left">
             <div class="form-inline">
-                <div class="form-group pull">
-                    <select class="form-control" ng-model='selectSalesman' ng-options='x.name for x in salesmans'>
-                            <option value="">请选择销售经理</option>
+                <div class="form-group pull" ng-show="judge">
+                    <select class="form-control">
+                            <option>请选择销售经理</option>
+                            <option ng-repeat='sell in sells' ng-model='selectSalesman'>{{sell.name}}</option>
                         </select>
                 </div>
-                <div class="form-group pull">
+                <div class="form-group pull" ng-show="judge">
                     <select class="form-control">
-                            <option ng-repeat='x in type' value="{{x}}">{{x}}</option>
-                           
+                            <option ng-repeat='serachType in types'>{{serachType}}</option>
                         </select>
                 </div>
                 <div class="search form-group">
                     <div class="input-group">
-                        <input type="text" class="form-control" id="search_text" placeholder="输入关键字">
-                         
-                        <div id="auto_div"><!-- 自动补全提示框 --></div>
-                        <span class="input-group-btn"> 
-                            <button class="btn btn-default glyphicon glyphicon-search" aria-hidden="true" ></button>
+                        <input type="text" class="form-control" id="search_text" placeholder="输入关键字" ng-click='suggest()' ng-model='company'>
+                        <div id="auto_div" style='z-index:1' ng-show='click'>
+                        <ul>
+                            <li ng-repeat='x in tip' style='list-style-type: none'>{{x.company}}</li>
+                        </ul>
+                        </div>
+                        <span class="input-group-btn" ng-show="judge">
+                            <button class="btn btn-default glyphicon glyphicon-search" aria-hidden="true" ng-click='search()'></button>
                         </span>
                     </div>
                 </div>
@@ -28,7 +31,7 @@
         </div>
         <!-- first-left end-->
         <div class="first-right">
-            <button type="button" class="btn btn-primary" ng-click='export()'>导出报表</button>
+            <button type="button" class="btn btn-primary" ng-click='export()' ng-show="judge">导出报表</button>
             <a href="#/manager1/addClient"><button type="button" class="btn btn-warning btn-primary">新建客户</button></a>
         </div>
     </div>
@@ -49,7 +52,7 @@
             <tr ng-repeat='client in clients'>
                 <td>{{client.company}}</td>
                 <td>
-                    <p id="type">{{client.selectType}}</p id="type">
+                    <p id="type">{{client.selectType}}</p>
                     <p>{{client.contractName}}</p>
                     <p>{{client.deptName}}
                     <p>{{client.contractPhone}}
@@ -58,14 +61,14 @@
                 <td>
                     <p ng-repeat="list in client.products">{{list.name}}</p>
                 </td>
-                <td>{{client.price}}</td>
+                <td>{{client.price}}W</td>
                 <td>{{client.lastMessage}}</td>
                 <td>{{client.sellName}}</td>
                 <td>{{client.lasttime|date:'yyyy年MM月dd日'}}</td>
                 <td>
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#maintain">查看进展</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#maintain" ng-click='progress($index)'>查看进展</button>
                     <button type="button" class="btn btn-client btn-primary" data-toggle="modal" data-target="#editClient"  ng-click='editClient($index)'>编辑</button>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#wantDel" ng-click='wantDel($index)'>删除</button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#wantDel" ng-click='wantDel($index)' ng-show="judge">删除</button>
                     <!-- 确认删除 model -->
                     <div class="modal fade myModal" id='wantDel' tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
                       <div class="modal-dialog">
@@ -76,7 +79,7 @@
                           </div>
 
                           <div class="modal-footer">
-                            
+
                             <button type="button" class="btn btn-primary btn-warning" ng-click='delClient(id)'>确认</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                           </div>
@@ -90,12 +93,21 @@
     </div>
     <!--second-section end-->
 
-    <!-- third-section -->
+    <!-- third-section 分页-->
     <div class="third-section">
-       <uib-pagination total-items="page.totalCount" ng-model="page.pageNo" max-size="5"  ng-change="pageChanged()" class="samplePage pagination-sm" boundary-link-numbers="true">
-       </uib-pagination> 
-    </div>  
-    
+      <!--  <uib-pagination total-items="page.totalCount" ng-model="page.pageNo" max-size="5"  ng-change="pageChanged()" class="samplePage pagination-sm" boundary-link-numbers="true">
+       </uib-pagination>  -->
+       <nav>
+            <ul class="pagination">
+                <li><a ng-click="Previous()"><span>上一页</span> </a></li>
+                <li ng-repeat="page in pageList" ng-class="{active: isActivePage(page)}" >
+                <a ng-click="selectPage(page)" ng-model='page'>{{ page }}</a>
+                </li>
+                <li><a ng-click="Next()"> <span>下一页</span></a></li>
+            </ul>
+        </nav>
+    </div>
+
      <!-- 编辑客户 Modal -->
     <div class="modal fade myModal client" id="editClient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog" role="document">
@@ -122,7 +134,7 @@
                                 <input type="text" name='contractName' class="form-control contact" id="inputName2" placeholder="姓名" required ng-model='contractName'>
                                 <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="myForm.contractName.$dirty && myForm.contractName.$valid"></span>
                             </div>
-                            <div class="col-sm-3"> 
+                            <div class="col-sm-3">
                                 <input type="text" name='contractPhone' class="form-control contact" id="inputName3" placeholder="联系电话" ng-pattern="/^1[3|4|5|7|8]\d{9}$/" ng-minlength="11" ng-maxlength="11" required ng-model='contractPhone'>
                                 <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="myForm.contractPhone.$dirty && myForm.contractPhone.$valid"></span>
                             </div>
@@ -134,26 +146,30 @@
                         <div class="form-group has-feedback">
                             <label class="col-sm-2 control-label">销售经理:</label>
                             <div class="col-sm-4">
-                                <select class="form-control" ng-model='sellName' ng-options='x.name for x in salesmans'>
-                                <option value="">{{sellName}}</option>
+                                <select class="form-control" ng-model='sellName' disabled>
+                                <option value="{{sellName}}">{{sellName}}</option>
+                                <option ng-repeat='x in sells'>{{x.name}}</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group has-feedback" id='newProduct'>
+                        <div class="form-group has-feedback">
                             <div ng-repeat="product in products" style='margin-top:5px;'>
                                 <label class="col-sm-2 control-label">产品意向:</label>
                                 <div class="col-sm-4">
-                                    <select class="form-control" ng-model='product.type'  >
-                                        <option ng-repeat="pu in purposes" value="{{pu.id}}" ng-selected="abbb(pu.name,product.name)">{{pu.name}}</option>
+                                    <select class="form-control" ng-model='product.name' ng-click='selectPro($index)'>
+                                        <option>{{products[$index].name}}</option>
+                                        <option ng-repeat="x in purposes">{{x.name}}</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control" placeholder="价格" ng-model="product.price">
                                 </div>
-                                <span class="glyphicon glyphicon-remove" id='del' aria-hidden="true" ng-click="removeProduct(product)">
-                                </span>
+                                <div class="col-sm-1 glyphicon glyphicon-remove" id='del' aria-hidden="true" ng-click="removeProduct(product)">
+                </div>
+                 <div class="col-sm-1 glyphicon glyphicon-plus" id='plus' aria-hidden="true" ng-click="addProduct()">
+                </div>
                             </div>
-                            <span class="glyphicon glyphicon-plus" id='plus' aria-hidden="true" ng-click="addProduct()"></span>                 
+
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">测试账号:</label>
@@ -169,18 +185,17 @@
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label"><span class='sign'>*</span>上传名片或营业执照:</label>
-                            <div class="col-sm-4" ng-controller="UploaderController">
-                                <div class='upload'>                   
+                            <div class="col-sm-4">
+                                <div class='upload'>
                                     <button type="button" class="btn btn-warning" style='width: 100%;'>选择图片</button>
-
-                                    <input type="file" file-model="myFile"/> 
+                                    <input type="file" file-model="myFile"/>
                                     <img ng-src="{{imageSrc}}"/>
 
-                               </div>                
+                               </div>
                             </div>
-                        </div> 
+                        </div>
                         <div class="form-group" style='text-align: center;'>
-                            <button type="button" class="btn btn-danger">上传图片</button>
+                            <button type="button" class="btn btn-danger" ng-click='uploadImg()'>上传图片</button>
                             <button type="button" class="btn btn-warning" ng-click=saveEditClient()>保存</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                         </div>
@@ -194,4 +209,43 @@
 
     <!-- 编辑客户 end -->
 
+
+    <!-- 查看进展 维护页面 Modal -->
+    <div class="modal fade myModal" id="maintain" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel" ng-model='company'>{{company}}</h4>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" rows="3" ng-model='new_progress'></textarea>
+                    <div class="form-inline">
+                        <div  style='margin-top: 5px;text-align: right;'>
+                            <select class="form-control" ng-model='type'>
+                                <option value="" selected='select'> 请选择客户类型</option>
+                                <option ng-repeat='type in typeDetil' value='{{type.id}}'>{{type.type}}</option>
+                            </select>
+                            <button type="button" class="btn btn-warning" ng-click="submit()">提交</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                    <div id='history'>
+                        <p>历史进展记录</p>
+                        <ul>
+                            <li ng-repeat='x in records'>
+                                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                                {{x.time|date:'yyyy年MM月dd日'}}&nbsp&nbsp
+                                {{x.userName}}&nbsp&nbsp
+                                {{x.state}}
+                                <p>{{x.message}}</p>
+                            </li>
+                        </ul>
+                </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- 维护页面 modal end-->
 </div>

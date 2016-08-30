@@ -4,17 +4,18 @@ app.controller('addClientCtrl',function($scope,$http,$location){
     $http.post("/crm/user/lists",{"start_page": 0,"page_size": 0})
     .success(function(response) {
         $scope.salesmans = response.data.list;
-        console.log(response.data.list)
+        // console.log(response.data.list)
+        // console.log($scope.salesmans)
+
     });
 //产品
     $http.post("/crm/product/lists",{})
     .success(function(response){
-        console.log(response.data)
+        // console.log(response.data)
         $scope.purposes = response.data;
     })    
-//产品意向 增加删除
-    $scope.products = [{type:''}];
-    // $http.get("../data/myJson.json").success(function(response) {$scope.purposes = response.purposes;});
+    //产品意向 增加删除
+    $scope.products = [{name:'',price:''}];
     $scope.addProduct = function() {
         $scope.products.push({type:'',price:''});
     };
@@ -22,37 +23,71 @@ app.controller('addClientCtrl',function($scope,$http,$location){
         var index = $scope.products.indexOf(contactToRemove);
         $scope.products.splice(index, 1);
     };
-    
-//保存
-    for(i in $scope.new_p)
+//保存 
     $scope.saveClient = function(){
-        console.log( $scope.new_company)
-        console.log($scope.product.value)
-          $http.post("/crm/client/save",    
-            { "company": $scope.new_company,
-              "contractname": $scope.new_contact,
-              "contractphone": $scope.new_contractPhone,
-              "deptname": $scope.new_deptName,
-              "products": [
-                {
-                  "id": $scope.products.$index,
-                  "price":$scope.product.value
+        // console.log($scope.new_company)
+        // console.log($scope.new_contact)
+        // console.log($scope.new_contractPhone)
+        // console.log($scope.new_deptName)
+        // console.log($scope.selectSalesman.id);
+        // console.log($scope.products);
+        var req_data = {
+            "company": $scope.new_company,
+            "contractName": $scope.new_contact,
+            "contractPhone": $scope.new_contractPhone,
+            "deptname":  $scope.new_deptName,
+            "managerid":$scope.selectSalesman.id,
+            "products":$scope.products,
+            "testAccount": $scope.testAccount,
+            "remark": $scope.remark,
+            "businessLicense": "url"
+        }
+        console.log(req_data);
+        if($scope.products==null){
+           return
+        };
+         $http.post("/crm/client/save",
+           JSON.stringify(req_data) 
+        ).success(function(data){
+            if (data.code == 0) { 
+                console.log(data)
+                $scope.toUrl = function(path){
+                    $location.path(path);
+                    console.log(path);
                 }
-              ],
-              "testaccount": $scope.new_testAccount,
-              "remark": $scope.new_remark,
-              "businesslicense": "string",
-              "price": "string"
-            }).success(function(data){
-                console.log(data);
-                if(data.code == 0 ){
-                    // $scope.toUrl = function(path){
-                    //     $location.path(path);
-                    //     console.log(path);
-                    // }
-                }else if(data.code == 10032){
-                    alert("...")
+            }else{
+                    alert("信息不能为空")
                 }
-            })
+        })    
     }
+
+
+    // $scope.uploadImg = function(){
+    //     $http.post("/crm/img/upload").success(function(result){
+    //         $scope.imageSrc=result;
+    //         console.log($scope.imageSrc)
+    //     })
+    // }
+
+//上传图片
+    $(function() {  
+        $("#uploadImage").fileupload({  
+            url: '/crm/img/upload',  
+            sequentialUploads: true  
+        }).bind('fileuploadprogress', function (e, data) {  
+            var progress = parseInt(data.loaded / data.total * 100, 10);  
+            $("#weixin_progress").css('width',progress + '%');  
+            $("#weixin_progress").html(progress + '%');  
+        }).bind('fileuploaddone', function (e, data) {  
+            $("#weixin_show").attr("src","__PUBLIC__/"+data.result);  
+            $("#weixin_upload").css({display:"none"});  
+            $("#weixin_cancle").css({display:""});  
+        });  
+                 
+    });  
+
+
 })
+
+
+

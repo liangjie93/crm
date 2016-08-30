@@ -1,23 +1,66 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="gb2312">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>è¶£çœ‹crmç™»é™†</title>
+    <title>È¤¿´crmµÇÂ½</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/signin.css" rel="stylesheet">
 </head>
-
+<script src="js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript">
+    var loginig = false;
+    function login() {
+        if (loginig) {
+            return;
+        }
+        var account = $.trim($("#account").val());
+        if (account == "") {
+            $("#account").focus();
+        }
+        var password = $.trim($("#password").val());
+        if (password == "") {
+            $("#password").focus();
+        }
+        var req_json = {};
+        req_json.account = account;
+        req_json.password = password;
+        loginig = true;
+        console.info(JSON.stringify(req_json));
+        $.ajax({
+                    type: "POST",
+                    url: "/crm/user/angula/login",
+                    data: JSON.stringify(req_json),
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (result) {
+                        loginig = false;
+                        if (result.code == 0) {
+                            window.location.replace("/crm/user/main.html");
+                        } else {
+                            alert(result.msg);
+                        }
+                    },
+                    error: function (error) {
+                        alert(erro);
+                        loginig = false;
+                    }
+                }
+        )
+    }
+</script>
 <body>
 
 <div class="signin">
     <div class="signin-head"><img src="" alt="" class="img-circle"></div>
-    <form class="form-signin" role="form" action="/crm/user/login" method="post">
-        <input type="text" class="form-control" name="account" placeholder="ç”¨æˆ·å" required autofocus/>
-        <input type="password" class="form-control" name="password" placeholder="å¯†ç " required/>
-        <button class="btn btn-lg btn-warning btn-block" type="submit">ç™»å½•</button>
-    </form>
+    <div class="form-signin">
+        <input id="account" type="text" class="form-control" name="account" placeholder="ÓÃ»§Ãû" required autofocus/>
+        <input id="password" type="password" class="form-control" name="password" onclick="" placeholder="ÃÜÂë"
+               required/>
+        <button class="btn btn-lg btn-warning btn-block" onclick="login()">µÇÂ¼</button>
+    </div>
+
+
 </div>
 
 

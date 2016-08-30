@@ -14,14 +14,14 @@
                 <th>姓名</th>
                 <th>联系电话</th>
                 <th>备注</th>
-                <th>数据</th>
+                <th>数据（客户数量）</th>
                 <th>操作</th>
             </tr>
             <tr ng-repeat='saleman in salesmans'>
                 <td>{{saleman.name}}</td>
                 <td>{{saleman.phone}}</td>
                 <td>{{saleman.remark}}</td>
-                <td>{{saleman.dealNum}}</td>
+                <td>{{saleman.dealNum}}&nbsp名客户</td>
                 <td>
                     <button type="button" class="btn btn-info btn-primary" data-toggle="modal" data-target="#editMarket" ng-click='editMarket($index)'>编辑</button>
                     <button type="button" class="btn btn-danger btn-primary" data-toggle="modal" data-target="#wantDel" ng-click='wantDel($index)'>删除</button>
@@ -50,8 +50,17 @@
 
     <!-- third-section -->
     <div class="third-section">
-       <uib-pagination total-items="page.totalCount" ng-model="page.pageNo" max-size="3"  ng-change="pageChanged()" class="samplePage pagination-sm" boundary-link-numbers="true">
-       </uib-pagination> 
+       <!-- <uib-pagination total-items="page.totalCount" ng-model="page.pageNo" max-size="3"  ng-change="pageChanged()" class="samplePage pagination-sm" boundary-link-numbers="true">
+       </uib-pagination>  -->
+        <nav>
+            <ul class="pagination">
+                <li><a ng-click="Previous()"><span>上一页</span> </a></li>
+                <li ng-repeat="page in pageList" ng-class="{active: isActivePage(page)}" >
+                <a ng-click="selectPage(page)">{{ page }}</a>
+                </li>
+                <li><a ng-click="Next()"> <span>下一页</span></a></li>
+            </ul>
+        </nav>
     </div>  
 
 

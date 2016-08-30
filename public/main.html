@@ -11,84 +11,48 @@
 
 </head>
 
-<body>
-
-    <div class="header">qukan</div>
+<body ng-app='app' ng-controller="appCtrl">
+    <div class="header"></div>
     <div class="left-container">
         <ul class='nav nav-pills nav-stacked'>
             <li role="presentation"><a href="#/manager1" id='manager1'>客户关系管理</a></li>
-            <li role="presentation"><a href="#/manager2" id='manager2'>销售人员管理</a></li>
+            <li role="presentation"><a href="#/manager2" id='manager2' ng-show="judge">销售人员管理</a></li>
         </ul>
     </div>
 
-
-    <div class="right-container" ng-app='app'>
+    <div class="right-container">
         <div ng-view></div>
-        
+
     </div>
 
+<script src="js/jquery-1.9.1.js"></script>
+<script src='js/bootstrap.min.js'></script>
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<script src="http://apps.bdimg.com/libs/angular-route/1.3.13/angular-route.js"></script>
+<script src='js/app.js'></script>
+<script src='js/route.js'></script>
+<script src='js/controllers/manager1.js'></script>
+<script src='js/controllers/addClient.js'></script>
+<script src='js/controllers/manager2.js'></script>
+<script src='js/controllers/uploader.js'></script>
+<script src='http://cdn.bootcss.com/angular-ui-bootstrap/1.3.2/ui-bootstrap-tpls.min.js'></script>
+<script src='js/vendor/jquery.ui.widget.js'></script>
+<script src="js/jquery.iframe-transport.js"></script>
+<script src="js/jquery.fileupload.js"></script> 
 
-    <!-- 查看进展 维护页面 Modal -->
-    <div class="modal fade myModal" id="maintain" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">浙江日报集团</h4>
-                </div>
-                <div class="modal-body">
-                    <textarea class="form-control" rows="3"></textarea>
-                    <div class="form-inline">
-                        <div  style='margin-top: 5px;right:10px'>
-                            <select class="form-control">
-                                <option value="">请选择客户类型</option>
-                                <option>A类用户（用意非常明确且重点维护）</option>
-                                <option>B类用户（）</option>
-                                <option>C类用户（）</option>
-                                <option>D类用户（）</option>                          
-                            </select>
-                            <button type="button" class="btn btn-warning">提交</button>
-                        </div>  
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <p id='history'>历史进展记录</p>
-                    <div class="glyphicon glyphicon-time" aria-hidden="true"></div> 
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- 维护页面 modal end-->
-
-    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
-    <script src='js/bootstrap.min.js'></script>
-    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
-    <script src="http://apps.bdimg.com/libs/angular-route/1.3.13/angular-route.js"></script>
-    <script src='js/app.js'></script>
-    <script src='js/route.js'></script>
-    <script src='js/controllers/manager1.js'></script>
-    <script src='js/controllers/addClient.js'></script>
-    <script src='js/controllers/manager2.js'></script>
-    <script src='js/controllers/uploader.js'></script>
-    <script src='http://cdn.bootcss.com/angular-ui-bootstrap/1.3.2/ui-bootstrap-tpls.min.js'></script>
+<script >
+    $('#manager1').click(function () {
+        $(this).css('background-color', '#ff5d17');
+        $('#manager2').css('background-color', '#333');
+    });
+    $('#manager2').click(function () {
+        $(this).css('background-color', '#ff5d17');
+        $('#manager1').css('background-color', '#333');
+    });
 
 
-
-    <script>
-        $('#manager1').click(function(){
-            $(this).css('background-color','#ff5d17');
-            $('#manager2').css('background-color','#333');
-        });
-        $('#manager2').click(function(){
-            $(this).css('background-color','#ff5d17');
-            $('#manager1').css('background-color','#333');
-        });
-
-    
 </script>
-   
-    
-    
+
 
 </body>
 

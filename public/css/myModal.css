@@ -20,17 +20,14 @@
     margin-right: 5px;
 }
 
-/*编辑客户*/
-#newProduct {
-    position: relative;
-}
-#newProduct #plus{
-    position: absolute;
-    right: 100px;
-    top: 5px;
-}
-/*main.html 维护 历史记录*/
 
+/*main.html 维护 历史记录*/
+#history li{
+    list-style-type: none
+}
+#history li p{
+    margin-left: 40px
+}
 
 /*确认删除*/
 #wantDel .modal-title {
