@@ -4,7 +4,7 @@ var permissionList;
 app.run(function (permissions) {
     permissions.setPermissions(permissionList);
 });
-app.controller("appCtrl",function($scope){
+app.controller("appCtrl",function($scope,$http){
     angular.element(document).ready(
         function () {
             $.get("/crm/user/permission", function (result) {
@@ -24,7 +24,16 @@ app.controller("appCtrl",function($scope){
 
             })
         }
-    )    
+    ) 
+
+//退出   
+    $scope.logout = function(){
+        $http.get("/crm/user/logout").success(function(result){
+            if(result.code == 0){
+                 // window.location.replace("/crm/user/index.html");
+            }
+        })
+    }
 })
 
 angular.module('app').factory('permissions', function ($rootScope) {

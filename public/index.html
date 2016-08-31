@@ -1,68 +1,106 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-    <meta charset="gb2312">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>趣看crm登陆</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/signin.css" rel="stylesheet">
+    <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>瓒ｇ湅CRM</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/form-elements.css">
+        <link rel="stylesheet" href="css/login.css">
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
 </head>
-<script src="js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript">
-    var loginig = false;
-    function login() {
-        if (loginig) {
-            return;
-        }
-        var account = $.trim($("#account").val());
-        if (account == "") {
-            $("#account").focus();
-        }
-        var password = $.trim($("#password").val());
-        if (password == "") {
-            $("#password").focus();
-        }
-        var req_json = {};
-        req_json.account = account;
-        req_json.password = password;
-        loginig = true;
-        console.info(JSON.stringify(req_json));
-        $.ajax({
-                    type: "POST",
-                    url: "/crm/user/angula/login",
-                    data: JSON.stringify(req_json),
-                    contentType: "application/json",
-                    dataType: "json",
-                    success: function (result) {
-                        loginig = false;
-                        if (result.code == 0) {
-                            window.location.replace("/crm/user/main.html");
-                        } else {
-                            alert(result.msg);
-                        }
-                    },
-                    error: function (error) {
-                        alert(erro);
-                        loginig = false;
-                    }
-                }
-        )
-    }
-</script>
 <body>
 
-<div class="signin">
-    <div class="signin-head"><img src="" alt="" class="img-circle"></div>
-    <div class="form-signin">
-        <input id="account" type="text" class="form-control" name="account" placeholder="用户名" required autofocus/>
-        <input id="password" type="password" class="form-control" name="password" onclick="" placeholder="密码"
-               required/>
-        <button class="btn btn-lg btn-warning btn-block" onclick="login()">登录</button>
+ <!-- Top content -->
+    <div class="top-content">
+        <div class="inner-bg">
+            <div class="container">
+                <div class="row"><div class="col-sm-8 col-sm-offset-2 text"><div class="description"></div></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3 form-box">
+                        <div class="form-top">
+                            <div class="form-top-left">
+                                    <h3>瓒ｇ湅CRM</h3>
+                                    <h4>瀹㈡埛鍏崇郴绠＄悊绯荤粺</h4>
+                            </div>
+                            <div class="form-top-right">
+                                <i class="fa fa-key"></i>
+                            </div>
+                        </div>
+                        <div class="form-bottom">
+                            <form role="form" action="" method="post" class="login-form">
+                                <div class="form-group">
+                                    <label class="sr-only" for="form-username">Username</label>
+                                    <input type="text" name="form-username" placeholder="Username..." class="form-username form-control" id="form-username">
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="form-password">Password</label>
+                                    <input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
+                                </div>
+                                <button type="submit" class="btn">Sign in!</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row"><div class="col-sm-6 col-sm-offset-3 social-login">  </div>
+                </div>
+            </div>
+        </div>         
     </div>
 
-
-</div>
-
-
+<!-- script -->
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.backstretch.min.js"></script>
+    <script src="js/login.js"></script>
+    <script type="text/javascript">
+        var loginig = false;
+        function login() {
+            if (loginig) {
+                return;
+            }
+            var account = $.trim($("#account").val());
+            if (account == "") {
+                $("#account").focus();
+            }
+            var password = $.trim($("#password").val());
+            if (password == "") {
+                $("#password").focus();
+            }
+            var req_json = {};
+            req_json.account = account;
+            req_json.password = password;
+            loginig = true;
+            console.info(JSON.stringify(req_json));
+            $.ajax({
+                        type: "POST",
+                        url: "/crm/user/angula/login",
+                        data: JSON.stringify(req_json),
+                        contentType: "application/json",
+                        dataType: "json",
+                        success: function (result) {
+                            loginig = false;
+                            if (result.code == 0) {
+                                window.location.replace("/crm/user/main.html");
+                            } else {
+                                alert(result.msg);
+                            }
+                        },
+                        error: function (error) {
+                            alert("璐﹀彿鎴栧瘑鐮侀敊璇�");
+                            loginig = false;
+                        }
+                    }
+            )
+        }
+    </script>
 </body>
 </html>

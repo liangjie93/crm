@@ -25,13 +25,6 @@ app.controller('addClientCtrl',function($scope,$http,$location){
 //保存 
     // if(!$scope.new_company ||)
     $scope.saveClient = function(){
-        console.log(111)
-        console.log($scope.id)
-        // console.log($scope.new_contact)
-        // console.log($scope.new_contractPhone)
-        // console.log($scope.new_deptName)
-        // console.log($scope.selectSalesman.id);
-        // console.log($scope.products);
         var req_data = {
             "company": $scope.new_company,
             "contractName": $scope.new_contact,
@@ -47,18 +40,21 @@ app.controller('addClientCtrl',function($scope,$http,$location){
         if($scope.products==null){
            return
         };
-         $http.post("/crm/client/save",
-           JSON.stringify(req_data) 
-        ).success(function(data){
-            if (data.code == 0) { 
-                console.log(data)
-                $scope.toUrl = function(path){
-                    path = "#/manager1"
+        if($scope.new_company==null || $scope.new_contact==null||$scope.new_contractPhone ==null ||$scope.new_deptName==null){alert("请填写基本信息") }
+        else {
+            $http.post("/crm/client/save",JSON.stringify(req_data) ).success(function(data){
+                if (data.code == 0) { 
+                    console.log(data)
+                    $scope.toUrl = function(path){
+                        path = "#/manager1"
+                    }
+                }else{
+                    alert("请选择销售人员")
                 }
-            }else{
-                    alert("信息不能为空")
-                }
-        })    
+            })
+        }
+        
+             
     }
 
     // $scope.uploadImg = function(){
@@ -81,8 +77,7 @@ app.controller('addClientCtrl',function($scope,$http,$location){
             $("#show").attr("src","__PUBLIC__/"+data.result);  
             $("#upload").css({display:"none"});  
             $("#cancle").css({display:""});  
-        });  
-                 
+        });         
     });  
 
    
